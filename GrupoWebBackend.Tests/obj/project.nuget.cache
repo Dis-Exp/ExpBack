@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "zUtSP+6jSgPnnBO0GFXxoDP/eqRndBalpz4NE3FvMrky0ohujETpm8vmDhRAIlPI0P3t2EfWqrz0ee0Optscaw==",
+  "dgSpecHash": "NIPf0g5ETi2slOpyzCWX5gtDAhirnEMQEbQrRBl1iUL30bz61k6GNSJb1U3pGicPFc1XprGTqSXoUPtRANVNLQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ricar\\Desktop\\GrupoWebBackend\\GrupoWebBackend.Tests\\GrupoWebBackend.Tests.csproj",
+  "projectFilePath": "C:\\Users\\ricar\\Desktop\\BackEnd\\GrupoWebBackend.Tests\\GrupoWebBackend.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ricar\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\ricar\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",

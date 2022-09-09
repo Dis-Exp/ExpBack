@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ricar\\Desktop\\GrupoWebBackend\\GrupoWebBackend.Tests\\GrupoWebBackend.Tests.csproj": {}
+    "C:\\Users\\ricar\\Desktop\\BackEnd\\GrupoWebBackend.Tests\\GrupoWebBackend.Tests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ricar\\Desktop\\GrupoWebBackend\\GrupoWebBackend.Tests\\GrupoWebBackend.Tests.csproj": {
+    "C:\\Users\\ricar\\Desktop\\BackEnd\\GrupoWebBackend.Tests\\GrupoWebBackend.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ricar\\Desktop\\GrupoWebBackend\\GrupoWebBackend.Tests\\GrupoWebBackend.Tests.csproj",
+        "projectUniqueName": "C:\\Users\\ricar\\Desktop\\BackEnd\\GrupoWebBackend.Tests\\GrupoWebBackend.Tests.csproj",
         "projectName": "GrupoWebBackend.Tests",
-        "projectPath": "C:\\Users\\ricar\\Desktop\\GrupoWebBackend\\GrupoWebBackend.Tests\\GrupoWebBackend.Tests.csproj",
+        "projectPath": "C:\\Users\\ricar\\Desktop\\BackEnd\\GrupoWebBackend.Tests\\GrupoWebBackend.Tests.csproj",
         "packagesPath": "C:\\Users\\ricar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ricar\\Desktop\\GrupoWebBackend\\GrupoWebBackend.Tests\\obj\\",
+        "outputPath": "C:\\Users\\ricar\\Desktop\\BackEnd\\GrupoWebBackend.Tests\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ricar\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\ricar\\Desktop\\GrupoWebBackend\\GrupoWebBackend\\GrupoWebBackend.csproj": {
-                "projectPath": "C:\\Users\\ricar\\Desktop\\GrupoWebBackend\\GrupoWebBackend\\GrupoWebBackend.csproj"
+              "C:\\Users\\ricar\\Desktop\\BackEnd\\GrupoWebBackend\\GrupoWebBackend.csproj": {
+                "projectPath": "C:\\Users\\ricar\\Desktop\\BackEnd\\GrupoWebBackend\\GrupoWebBackend.csproj"
               }
             }
           }
@@ -108,14 +108,14 @@
         }
       }
     },
-    "C:\\Users\\ricar\\Desktop\\GrupoWebBackend\\GrupoWebBackend\\GrupoWebBackend.csproj": {
+    "C:\\Users\\ricar\\Desktop\\BackEnd\\GrupoWebBackend\\GrupoWebBackend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ricar\\Desktop\\GrupoWebBackend\\GrupoWebBackend\\GrupoWebBackend.csproj",
+        "projectUniqueName": "C:\\Users\\ricar\\Desktop\\BackEnd\\GrupoWebBackend\\GrupoWebBackend.csproj",
         "projectName": "GrupoWebBackend",
-        "projectPath": "C:\\Users\\ricar\\Desktop\\GrupoWebBackend\\GrupoWebBackend\\GrupoWebBackend.csproj",
+        "projectPath": "C:\\Users\\ricar\\Desktop\\BackEnd\\GrupoWebBackend\\GrupoWebBackend.csproj",
         "packagesPath": "C:\\Users\\ricar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ricar\\Desktop\\GrupoWebBackend\\GrupoWebBackend\\obj\\",
+        "outputPath": "C:\\Users\\ricar\\Desktop\\BackEnd\\GrupoWebBackend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ricar\\AppData\\Roaming\\NuGet\\NuGet.Config",

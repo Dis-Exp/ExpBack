@@ -82,6 +82,5 @@ namespace GrupoWebBackend.DomainDistrict.Controllers
             var districtResourceResource = _mapper.Map<District, DistrictResource>(result.Resource);
             return Ok(districtResourceResource);
         }
-
     }
 }

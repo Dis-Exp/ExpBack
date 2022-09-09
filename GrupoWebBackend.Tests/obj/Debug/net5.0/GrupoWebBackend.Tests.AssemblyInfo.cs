@@ -10,7 +10,7 @@
 using System;
 using System.Reflection;
 
-[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("GrupoWebBackend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "C:\\Users\\ricar\\Desktop\\GrupoWebBackend\\GrupoWebBackend", "GrupoWebBackend.csproj", "0")]
+[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("GrupoWebBackend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "C:\\Users\\ricar\\Desktop\\BackEnd\\GrupoWebBackend", "GrupoWebBackend.csproj", "0")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("GrupoWebBackend.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ricar\\Desktop\\GrupoWebBackend\\GrupoWebBackend\\GrupoWebBackend.csproj": {}
+    "C:\\Users\\ricar\\Desktop\\BackEnd\\GrupoWebBackend\\GrupoWebBackend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ricar\\Desktop\\GrupoWebBackend\\GrupoWebBackend\\GrupoWebBackend.csproj": {
+    "C:\\Users\\ricar\\Desktop\\BackEnd\\GrupoWebBackend\\GrupoWebBackend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ricar\\Desktop\\GrupoWebBackend\\GrupoWebBackend\\GrupoWebBackend.csproj",
+        "projectUniqueName": "C:\\Users\\ricar\\Desktop\\BackEnd\\GrupoWebBackend\\GrupoWebBackend.csproj",
         "projectName": "GrupoWebBackend",
-        "projectPath": "C:\\Users\\ricar\\Desktop\\GrupoWebBackend\\GrupoWebBackend\\GrupoWebBackend.csproj",
+        "projectPath": "C:\\Users\\ricar\\Desktop\\BackEnd\\GrupoWebBackend\\GrupoWebBackend.csproj",
         "packagesPath": "C:\\Users\\ricar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ricar\\Desktop\\GrupoWebBackend\\GrupoWebBackend\\obj\\",
+        "outputPath": "C:\\Users\\ricar\\Desktop\\BackEnd\\GrupoWebBackend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ricar\\AppData\\Roaming\\NuGet\\NuGet.Config",

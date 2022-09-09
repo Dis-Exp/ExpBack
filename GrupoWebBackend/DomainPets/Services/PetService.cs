@@ -65,6 +65,8 @@ namespace GrupoWebBackend.DomainPets.Services
             existingPet.Type = pet.Type;
             existingPet.IsAdopted = pet.IsAdopted;
             existingPet.IsPublished = pet.IsPublished;
+            existingPet.UserId = pet.UserId;
+            existingPet.UrlToImage = pet.UrlToImage;
 
             try
             {

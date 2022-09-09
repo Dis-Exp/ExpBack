@@ -1,9 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
-using GrupoWebBackend.DomainPets.Domain.Models;
-using GrupoWebBackend.DomainPets.Domain.Services.Communications;
-using GrupoWebBackend.DomainPets.Resources;
 using GrupoWebBackend.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using GrupoWebBackend.Security.Authorization.Attributes;
@@ -15,7 +12,6 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace GrupoWebBackend.Security.Controllers
 {
-    [Authorize]
     [ApiController]
     [Route("/api/v1/[controller]")]
     public class UsersController : ControllerBase
