@@ -12,7 +12,7 @@ namespace GrupoWebBackend.DomainAdvertisements.Domain.Models
         public string UrlToImage { get; set; }
         public bool Promoted { get; set; }
         public User User { get; set; }
-        public int UserId { get; set; }
+        public int UserId { get; set; } 
         
       
     }

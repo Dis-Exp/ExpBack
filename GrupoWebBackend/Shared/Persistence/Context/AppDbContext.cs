@@ -7,6 +7,7 @@ using GrupoWebBackend.DomainAdoptionsRequests.Domain.Models;
 using GrupoWebBackend.DomainDistrict.Domain.Models;
 using GrupoWebBackend.Security.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using GrupoWebBackend.DomainReport;
 
 namespace GrupoWebBackend.Shared.Persistence.Context
 {
@@ -24,17 +25,27 @@ namespace GrupoWebBackend.Shared.Persistence.Context
         public DbSet<Publication> Publications { get; set; }
         public DbSet<AdoptionsRequests> AdoptionsRequests { get; set; }
         public DbSet<District> Districts { get; set; }
-        
+        public DbSet<Report> Reports { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+
+            // Reports
+            builder.Entity<Report>().ToTable("Reports");
+            builder.Entity<Report>().HasKey(p => p.Id);
+            builder.Entity<Report>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Report>().Property(p => p.UserId).IsRequired();
+            builder.Entity<Report>().Property(p => p.Type).IsRequired(false);
+            builder.Entity<Report>().Property(p => p.Description).IsRequired(false);
+            builder.Entity<Report>().Property(p => p.DateTime).IsRequired(false);
+
+
             // Districts
             builder.Entity<District>().ToTable("Districts");
             builder.Entity<District>().HasKey(p => p.Id);
             builder.Entity<District>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
-
-            
-            
             
             // Users
             builder.Entity<User>().ToTable("Users");
@@ -102,6 +113,17 @@ namespace GrupoWebBackend.Shared.Persistence.Context
             builder.Entity<District>().HasKey(p => p.Id);
             builder.Entity<District>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<District>().Property(p => p.DistrictName).IsRequired();
+
+
+            // Reports Relationship
+            builder.Entity<Report>().HasOne(p => p.User)
+                .WithMany(p => p.Reports)
+                .HasForeignKey(p => p.UserId);
+
+            builder.Entity<User>().HasMany(p => p.Reports)
+                .WithOne(p => p.User)
+                .HasForeignKey(p => p.UserId);
+
 
             // District Relationship
             builder.Entity<District>().HasMany(p => p.User)

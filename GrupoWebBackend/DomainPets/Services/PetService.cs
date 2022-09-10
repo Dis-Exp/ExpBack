@@ -49,7 +49,7 @@ namespace GrupoWebBackend.DomainPets.Services
             }
             catch (Exception e)
             {
-                return new SavePetResponse($"An error occurred while saving Category: {e.Message}");
+                return new SavePetResponse($"An error occurred while saving Pet: {e.Message}");
             }
         }
 

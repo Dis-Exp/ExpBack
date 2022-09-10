@@ -17,6 +17,7 @@ namespace GrupoWebBackend.Security.Domain.Services.Communication
         public string Token { get; set; }
         public string? UrlToImageBackground { get; set; }
         public string? UrlToImageProfile { get; set; }
+
         protected AuthenticateResponse(User user, string token)
         {
             Id = user.Id;

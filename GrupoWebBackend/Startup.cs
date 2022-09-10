@@ -37,7 +37,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using GrupoWebBackend.Shared.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
-
+using GrupoWebBackend.DomainReport;
 
 namespace GrupoWebBackend
 {
@@ -91,7 +91,9 @@ namespace GrupoWebBackend
             services.AddScoped<IAdvertisementService, AdvertisementService>();
             services.AddScoped<IDistrictService, DistrictService>();
             services.AddScoped<IDistrictRepository, DistrictRepository>();
-            
+            services.AddScoped<IReportService, ReportService>();
+            services.AddScoped<IReportRepository, ReportRepository>();
+
             // AutoMapper Configuration
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }

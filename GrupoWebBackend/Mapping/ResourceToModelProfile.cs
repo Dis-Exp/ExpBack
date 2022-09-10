@@ -12,6 +12,9 @@ using GrupoWebBackend.DomainPublications.Resources;
 using GrupoWebBackend.Security.Domain.Entities;
 using GrupoWebBackend.Security.Domain.Services.Communication;
 using GrupoWebBackend.Security.Resources;
+using GrupoWebBackend.DomainReport;
+using GrupoWebBackend.DomainReport.Models;
+
 namespace GrupoWebBackend.Mapping
 {
     public class ResourceToModelProfile : Profile
@@ -27,6 +30,7 @@ namespace GrupoWebBackend.Mapping
             CreateMap<AuthenticateResponse, User>();
             CreateMap<AuthenticateRequest, User>();
             CreateMap<UserResource, User>();
+            CreateMap<ReportResource, Report>();
         }
     }
 }

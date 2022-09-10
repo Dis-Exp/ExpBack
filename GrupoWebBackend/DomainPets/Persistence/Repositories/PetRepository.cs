@@ -3,8 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using GrupoWebBackend.DomainPets.Domain.Models;
 using GrupoWebBackend.DomainPets.Domain.Repositories;
-using GrupoWebBackend.DomainPets.Domain.Services.Communications;
-using GrupoWebBackend.DomainPublications.Domain.Models;
 using GrupoWebBackend.Shared.Persistence.Context;
 using GrupoWebBackend.Shared.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;

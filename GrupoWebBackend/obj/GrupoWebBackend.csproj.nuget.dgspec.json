@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ricar\\Desktop\\BackEnd\\GrupoWebBackend\\GrupoWebBackend.csproj": {}
+    "C:\\Users\\ricar\\Desktop\\Exp CLone\\ExpBack\\GrupoWebBackend\\GrupoWebBackend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ricar\\Desktop\\BackEnd\\GrupoWebBackend\\GrupoWebBackend.csproj": {
+    "C:\\Users\\ricar\\Desktop\\Exp CLone\\ExpBack\\GrupoWebBackend\\GrupoWebBackend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ricar\\Desktop\\BackEnd\\GrupoWebBackend\\GrupoWebBackend.csproj",
+        "projectUniqueName": "C:\\Users\\ricar\\Desktop\\Exp CLone\\ExpBack\\GrupoWebBackend\\GrupoWebBackend.csproj",
         "projectName": "GrupoWebBackend",
-        "projectPath": "C:\\Users\\ricar\\Desktop\\BackEnd\\GrupoWebBackend\\GrupoWebBackend.csproj",
+        "projectPath": "C:\\Users\\ricar\\Desktop\\Exp CLone\\ExpBack\\GrupoWebBackend\\GrupoWebBackend.csproj",
         "packagesPath": "C:\\Users\\ricar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ricar\\Desktop\\BackEnd\\GrupoWebBackend\\obj\\",
+        "outputPath": "C:\\Users\\ricar\\Desktop\\Exp CLone\\ExpBack\\GrupoWebBackend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ricar\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -121,7 +121,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.410\\RuntimeIdentifierGraph.json"
         }
       }
     }
