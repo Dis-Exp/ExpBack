@@ -1,32 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ricar\\Desktop\\Exp CLone\\ExpBack\\GrupoWebBackend\\GrupoWebBackend.csproj": {}
+    "C:\\Users\\lmoli\\GitHub\\ExpBack\\GrupoWebBackend\\GrupoWebBackend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ricar\\Desktop\\Exp CLone\\ExpBack\\GrupoWebBackend\\GrupoWebBackend.csproj": {
+    "C:\\Users\\lmoli\\GitHub\\ExpBack\\GrupoWebBackend\\GrupoWebBackend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ricar\\Desktop\\Exp CLone\\ExpBack\\GrupoWebBackend\\GrupoWebBackend.csproj",
+        "projectUniqueName": "C:\\Users\\lmoli\\GitHub\\ExpBack\\GrupoWebBackend\\GrupoWebBackend.csproj",
         "projectName": "GrupoWebBackend",
-        "projectPath": "C:\\Users\\ricar\\Desktop\\Exp CLone\\ExpBack\\GrupoWebBackend\\GrupoWebBackend.csproj",
-        "packagesPath": "C:\\Users\\ricar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ricar\\Desktop\\Exp CLone\\ExpBack\\GrupoWebBackend\\obj\\",
+        "projectPath": "C:\\Users\\lmoli\\GitHub\\ExpBack\\GrupoWebBackend\\GrupoWebBackend.csproj",
+        "packagesPath": "C:\\Users\\lmoli\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\lmoli\\GitHub\\ExpBack\\GrupoWebBackend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ricar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\lmoli\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net5.0"
+          "net6.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net5.0": {
-            "targetAlias": "net5.0",
+          "net6.0": {
+            "targetAlias": "net6.0",
             "projectReferences": {}
           }
         },
@@ -37,8 +37,8 @@
         }
       },
       "frameworks": {
-        "net5.0": {
-          "targetAlias": "net5.0",
+        "net6.0": {
+          "targetAlias": "net6.0",
           "dependencies": {
             "AutoMapper": {
               "target": "Package",
@@ -109,7 +109,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -121,7 +122,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.410\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
