@@ -6,6 +6,7 @@ using GrupoWebBackend.DomainDistrict.Domain.Models;
 using GrupoWebBackend.DomainPets.Domain.Models;
 using GrupoWebBackend.DomainPublications.Domain.Models;
 using GrupoWebBackend.DomainReport;
+using GrupoWebBackend.DomainSubscriptions.Domain.Models;
 
 namespace GrupoWebBackend.Security.Domain.Entities
 {
@@ -35,6 +36,8 @@ namespace GrupoWebBackend.Security.Domain.Entities
         public IList<Advertisement> Advertisements { get; set; } = new List<Advertisement>();
         public IList<Publication> Publications { get; set; }=new List<Publication>();
         public IList<AdoptionsRequests> AdoptionsRequestsList { get; set; } = new List<AdoptionsRequests>();
-        
+
+        public Subscription Subscription { get; set; }
+
     }
 }

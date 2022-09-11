@@ -8,6 +8,7 @@ using GrupoWebBackend.DomainDistrict.Domain.Models;
 using GrupoWebBackend.Security.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using GrupoWebBackend.DomainReport;
+using GrupoWebBackend.DomainSubscriptions.Domain.Models;
 
 namespace GrupoWebBackend.Shared.Persistence.Context
 {
@@ -26,6 +27,7 @@ namespace GrupoWebBackend.Shared.Persistence.Context
         public DbSet<AdoptionsRequests> AdoptionsRequests { get; set; }
         public DbSet<District> Districts { get; set; }
         public DbSet<Report> Reports { get; set; }
+        public DbSet<Subscription> Subscriptions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -114,6 +116,17 @@ namespace GrupoWebBackend.Shared.Persistence.Context
             builder.Entity<District>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<District>().Property(p => p.DistrictName).IsRequired();
 
+            //Subscriptions
+
+            builder.Entity<Subscription>().ToTable("Subscriptions");
+            builder.Entity<Subscription>().HasKey(s => s.Id);
+            builder.Entity<Subscription>().Property(s => s.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Subscription>().Property(s => s.NumPosts).IsRequired();
+            builder.Entity<Subscription>().Property(s => s.StartDate).IsRequired();
+            builder.Entity<Subscription>().Property(s => s.EndDate).IsRequired();
+            builder.Entity<Subscription>().Property(s => s.UserId).IsRequired();
+            builder.Entity<Subscription>().Property(s => s.Expired).IsRequired();
+
 
             // Reports Relationship
             builder.Entity<Report>().HasOne(p => p.User)
@@ -163,6 +176,11 @@ namespace GrupoWebBackend.Shared.Persistence.Context
             builder.Entity<User>().HasMany(p => p.AdoptionsRequestsList)
                 .WithOne(p => p.User)
                 .HasForeignKey(p => p.UserIdFrom);
+
+            //Subscriptions Relations
+            builder.Entity<User>().HasOne(u => u.Subscription)
+               .WithOne(s => s.User)
+               .HasForeignKey<Subscription>(s => s.UserId);
           
           /*  builder.Entity<User>().HasMany(p => p.AdoptionsRequestsList)
                 .WithOne(p => p.User)
