@@ -25,6 +25,8 @@ namespace GrupoWebBackend.Security.Domain.Entities
         public string? UrlToImageBackground { get; set; }
         public string? UrlToImageProfile { get; set; }
         public int? DistrictId { get; set; }
+
+        public bool IsAuthenticated { get; set; }
         
         public District District { get; set; }
 

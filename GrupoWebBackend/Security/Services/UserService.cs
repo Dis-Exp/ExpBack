@@ -150,6 +150,7 @@ namespace GrupoWebBackend.Security.Services
             existingUser.UrlToImageBackground = user.UrlToImageBackground;
             existingUser.UrlToImageProfile = user.UrlToImageProfile;
             existingUser.DistrictId = user.DistrictId;
+            existingUser.IsAuthenticated = user.IsAuthenticated;
 
             try
             {

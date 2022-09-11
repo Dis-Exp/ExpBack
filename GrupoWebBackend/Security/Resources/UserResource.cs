@@ -14,5 +14,6 @@ namespace GrupoWebBackend.Security.Resources
         public int? DistrictId { get; set; }
         public string? UrlToImageBackground { get; set; }
         public string? UrlToImageProfile { get; set; }
+        public bool IsAuthenticated { get; set; }
     }
 }
