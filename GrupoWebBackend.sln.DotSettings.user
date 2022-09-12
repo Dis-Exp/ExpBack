@@ -7,10 +7,10 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=07a6696a_002Db089_002D4bc1_002D845f_002Dd6377c1b95cb/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from &amp;lt;GrupoWebBackend.Tests&amp;gt;" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;Project Location="C:\Users\ricar\Desktop\Backend Web\GrupoWebBackend\GrupoWebBackend.Tests" Presentation="&amp;lt;GrupoWebBackend.Tests&amp;gt;" /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=aff8138c_002D9f8e_002D4e0f_002Db6b2_002D27b683269f50/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from &amp;lt;GrupoWebBackend.Tests&amp;gt;" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=aff8138c_002D9f8e_002D4e0f_002Db6b2_002D27b683269f50/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from &amp;lt;GrupoWebBackend.Tests&amp;gt;" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;Project Location="D:\Documentos\2021-2\Backend-Aplicaciones web-Versiones\v13\GrupoWebBackend\GrupoWebBackend.Tests" Presentation="&amp;lt;GrupoWebBackend.Tests&amp;gt;" /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=b58df034_002Dc1a1_002D47a4_002Dbe0f_002D30bcf7a3bdfb/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="UserIsAuthenticatedTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=b58df034_002Dc1a1_002D47a4_002Dbe0f_002D30bcf7a3bdfb/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="UserIsAuthenticatedTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::9218BBBB-8680-41FA-BC0C-305F6DDD4DAB::net6.0::GrupoWebBackend.Tests.Tests.UserIsAuthenticatedTest&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;

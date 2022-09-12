@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using GrupoWebBackend.DomainAdoptionsRequests.Domain.Services.Communications;
 using GrupoWebBackend.DomainPublications.Domain.Repositories;
+using GrupoWebBackend.Security.Domain.Repositories;
 using GrupoWebBackend.Shared.Domain.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -24,14 +25,17 @@ namespace GrupoWebBackend.DomainAdoptionsRequests.Services
         private readonly IUnitOfWork _unitOfWork;
         
         private readonly IPublicationRepository _publicationRepository;
+        private readonly IUserRepository _userRepository;
 
         public AdoptionsRequestsService(IAdoptionsRequestsRepository adoptionsRequestsRepository,
             IPublicationRepository publicationRepository,
-            IUnitOfWork unitOfWork)
+            IUnitOfWork unitOfWork, IUserRepository userRepository)
         {
             _requestsAdoptionsRepository = adoptionsRequestsRepository;
             _unitOfWork = unitOfWork;
             _publicationRepository = publicationRepository;
+            _userRepository = userRepository;
+
         }
 
         public async Task<IEnumerable<AdoptionsRequests>> ListAdoptionsRequestsAsync()
@@ -46,14 +50,23 @@ namespace GrupoWebBackend.DomainAdoptionsRequests.Services
 */
       public async Task<SaveAdoptionsRequestsResponse> AddAsync(AdoptionsRequests adoptionsRequest)
       {
-          var existingUser = _publicationRepository.FindByUserId(adoptionsRequest.UserIdFrom);
-          if (existingUser == null)
+          var existingPublication = _publicationRepository.FindByUserId(adoptionsRequest.UserIdFrom);
+          
+          if (existingPublication == null)
               return new SaveAdoptionsRequestsResponse("invalid user");
+           
+          var existingUser = await _userRepository.FindByIdAsync(adoptionsRequest.UserIdFrom);
+          
+          if (!existingUser.IsAuthenticated())
+              return new SaveAdoptionsRequestsResponse("User not is Authenticated.");
+          if (existingUser.IsReported())
+              return new SaveAdoptionsRequestsResponse("This user has at least one report.");
+          
           try
           {
-          await _requestsAdoptionsRepository.AddAsync(adoptionsRequest);
-          await _unitOfWork.CompleteAsync();
-          return new SaveAdoptionsRequestsResponse(adoptionsRequest);
+              await _requestsAdoptionsRepository.AddAsync(adoptionsRequest);
+              await _unitOfWork.CompleteAsync();
+              return new SaveAdoptionsRequestsResponse(adoptionsRequest);
           }
           catch (Exception e)
           {
