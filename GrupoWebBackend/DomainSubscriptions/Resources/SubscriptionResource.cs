@@ -1,4 +1,6 @@
-﻿namespace GrupoWebBackend.DomainSubscriptions.Resources
+﻿using System;
+
+namespace GrupoWebBackend.DomainSubscriptions.Resources
 {
     public class SubscriptionResource
     {

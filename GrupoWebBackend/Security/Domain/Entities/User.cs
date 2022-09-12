@@ -26,8 +26,6 @@ namespace GrupoWebBackend.Security.Domain.Entities
         public string? UrlToImageProfile { get; set; }
         public int? DistrictId { get; set; }
 
-        public bool IsAuthenticated { get; set; }
-        
         public District District { get; set; }
 
         [JsonIgnore]
@@ -40,6 +38,17 @@ namespace GrupoWebBackend.Security.Domain.Entities
         public IList<AdoptionsRequests> AdoptionsRequestsList { get; set; } = new List<AdoptionsRequests>();
 
         public Subscription Subscription { get; set; }
+
+        public bool IsAuthenticated()
+        {
+            return (this.Name != "" && this.LastName != "" && this.District != null && this.Phone != "" && this.Ruc != "" &&
+                    this.Dni != "");
+        }
+
+        public bool IsReported()
+        {
+            return (this.Reports.Count > 0);
+        }
 
     }
 }
