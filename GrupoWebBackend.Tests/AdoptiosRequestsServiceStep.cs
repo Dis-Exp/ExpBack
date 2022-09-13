@@ -43,6 +43,8 @@ namespace GrupoWebBackend.Tests
         {
             var resource = saveAdoptionsRequests.CreateSet<SaveAdoptionsRequestsResource>().First();
             var content = new StringContent(resource.ToJson(), Encoding.UTF8, MediaTypeNames.Application.Json);
+            Console.WriteLine("GAAAAAAAATO");
+            TestContext.WriteLine("GAAAATO");
             Response = _client.PostAsync(_baseUri, content);
         }
         [Then(@"A Response with Status (.*) is received")]

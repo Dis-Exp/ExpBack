@@ -53,14 +53,17 @@ namespace GrupoWebBackend.DomainAdoptionsRequests.Services
           var existingPublication = _publicationRepository.FindByUserId(adoptionsRequest.UserIdFrom);
           
           if (existingPublication == null)
-              return new SaveAdoptionsRequestsResponse("invalid user");
+              return new SaveAdoptionsRequestsResponse(false, "Invalid User.", adoptionsRequest);
            
           var existingUser = await _userRepository.FindByIdAsync(adoptionsRequest.UserIdFrom);
           
+          if (existingUser == null)
+              return new SaveAdoptionsRequestsResponse(false, "Invalid User.", adoptionsRequest);
+          
           if (!existingUser.IsAuthenticated())
-              return new SaveAdoptionsRequestsResponse("User not is Authenticated.");
+              return new SaveAdoptionsRequestsResponse(false, "This user is not authenticated.", adoptionsRequest);
           if (existingUser.IsReported())
-              return new SaveAdoptionsRequestsResponse("This user has at least one report.");
+              return new SaveAdoptionsRequestsResponse(false, "This user has at least one report.", adoptionsRequest);
           
           try
           {

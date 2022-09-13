@@ -11,8 +11,9 @@
   &lt;Project Location="D:\Documentos\2021-2\Backend-Aplicaciones web-Versiones\v13\GrupoWebBackend\GrupoWebBackend.Tests" Presentation="&amp;lt;GrupoWebBackend.Tests&amp;gt;" /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=b58df034_002Dc1a1_002D47a4_002Dbe0f_002D30bcf7a3bdfb/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="UserIsAuthenticatedTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::9218BBBB-8680-41FA-BC0C-305F6DDD4DAB::net6.0::GrupoWebBackend.Tests.Tests.UserIsAuthenticatedTest&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
+  &lt;Or&gt;&#xD;
+    &lt;ProjectFile&gt;9218BBBB-8680-41FA-BC0C-305F6DDD4DAB/f:UnitTest1.cs&lt;/ProjectFile&gt;&#xD;
+    &lt;ProjectFile&gt;9218BBBB-8680-41FA-BC0C-305F6DDD4DAB/f:AdoptionsRequestsServiceTests.feature.cs&lt;/ProjectFile&gt;&#xD;
+  &lt;/Or&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	</wpf:ResourceDictionary>

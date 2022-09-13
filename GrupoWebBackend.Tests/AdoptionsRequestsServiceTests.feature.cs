@@ -87,7 +87,6 @@ namespace GrupoWebBackend.Tests
                         "Id",
                         "Type",
                         "UserNick",
-                        "Pass",
                         "Ruc",
                         "Dni",
                         "Phone",
@@ -99,7 +98,6 @@ namespace GrupoWebBackend.Tests
                         "1",
                         "VET",
                         "Frank",
-                        "Password",
                         "A12345rf",
                         "70258688",
                         "946401234",
@@ -128,7 +126,7 @@ namespace GrupoWebBackend.Tests
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("A AdoptionsRequests is sent", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 11
-this.ScenarioInitialize(scenarioInfo);
+ this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
             bool isFeatureIgnored = default(bool);
@@ -151,22 +149,22 @@ this.ScenarioInitialize(scenarioInfo);
  this.FeatureBackground();
 #line hidden
                 TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
-                            "Message",
-                            "Status",
-                            "UserIdFrom",
-                            "UserId",
-                            "PublicationId"});
+                            "message",
+                            "status",
+                            "userIdFrom",
+                            "userIdAt",
+                            "publicationId"});
                 table5.AddRow(new string[] {
                             "hello",
                             "pending",
-                            "2",
+                            "3",
                             "1",
                             "1"});
 #line 12
- testRunner.When("A adoption request is sent", ((string)(null)), table5, "When ");
+  testRunner.When("A adoption request is sent", ((string)(null)), table5, "When ");
 #line hidden
 #line 15
- testRunner.Then("A Response with Status 200 is received", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+  testRunner.Then("A Response with Status 200 is received", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -181,7 +179,7 @@ this.ScenarioInitialize(scenarioInfo);
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add Adoption Request with empty data", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 16
-this.ScenarioInitialize(scenarioInfo);
+ this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
             bool isFeatureIgnored = default(bool);
@@ -210,10 +208,10 @@ this.ScenarioInitialize(scenarioInfo);
                             "hello",
                             ""});
 #line 17
- testRunner.When("A post adoption request is sent", ((string)(null)), table6, "When ");
+  testRunner.When("A post adoption request is sent", ((string)(null)), table6, "When ");
 #line hidden
 #line 20
- testRunner.Then("AAdoptionRequests With Status 400 is received", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+  testRunner.Then("AAdoptionRequests With Status 400 is received", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -228,7 +226,7 @@ this.ScenarioInitialize(scenarioInfo);
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add Adoption Request with same data", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 21
-this.ScenarioInitialize(scenarioInfo);
+ this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
             bool isFeatureIgnored = default(bool);
@@ -263,10 +261,10 @@ this.ScenarioInitialize(scenarioInfo);
                             "1",
                             "1"});
 #line 22
- testRunner.When("A post adoption request is sent", ((string)(null)), table7, "When ");
+  testRunner.When("A post adoption request is sent", ((string)(null)), table7, "When ");
 #line hidden
 #line 25
- testRunner.Then("AAdoptionRequests With Status 200 is received", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+  testRunner.Then("AAdoptionRequests With Status 200 is received", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -281,7 +279,7 @@ this.ScenarioInitialize(scenarioInfo);
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete a adoptions request dont available", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 27
-  this.ScenarioInitialize(scenarioInfo);
+ this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
             bool isFeatureIgnored = default(bool);
@@ -316,10 +314,10 @@ this.ScenarioInitialize(scenarioInfo);
                             "2",
                             "18"});
 #line 28
-        testRunner.When("An a delete request of adoptions requests is sent", ((string)(null)), table8, "When ");
+  testRunner.When("An a delete request of adoptions requests is sent", ((string)(null)), table8, "When ");
 #line hidden
 #line 31
-        testRunner.Then("a response with status 400 is received", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+  testRunner.Then("a response with status 400 is received", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -334,7 +332,7 @@ this.ScenarioInitialize(scenarioInfo);
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Database update its information when there is a new candidate for adopting", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 33
-       this.ScenarioInitialize(scenarioInfo);
+ this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
             bool isFeatureIgnored = default(bool);
@@ -357,7 +355,7 @@ this.ScenarioInitialize(scenarioInfo);
  this.FeatureBackground();
 #line hidden
 #line 34
-   testRunner.Given("the endpoint https://localhost:5001/api/v1/AdoptionsRequests/1 is available", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+  testRunner.Given("the endpoint https://localhost:5001/api/v1/AdoptionsRequests/1 is available", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
                 TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
@@ -384,7 +382,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "Araoz",
                             "1"});
 #line 35
-        testRunner.And("A User is already stored for AdoptionsRequests", ((string)(null)), table9, "And ");
+  testRunner.And("A User is already stored for AdoptionsRequests", ((string)(null)), table9, "And ");
 #line hidden
                 TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                             "Message",
@@ -399,10 +397,10 @@ this.ScenarioInitialize(scenarioInfo);
                             "1",
                             "1"});
 #line 38
-   testRunner.When("An update  adoption request is sent", ((string)(null)), table10, "When ");
+  testRunner.When("An update  adoption request is sent", ((string)(null)), table10, "When ");
 #line hidden
 #line 41
-        testRunner.Then("a response with status 200 is received", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+  testRunner.Then("a response with status 200 is received", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

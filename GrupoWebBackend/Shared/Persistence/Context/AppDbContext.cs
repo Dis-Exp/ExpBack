@@ -203,13 +203,12 @@ namespace GrupoWebBackend.Shared.Persistence.Context
                 }
             );*/
 
-            /*builder.Entity<User>().HasData(
+            builder.Entity<User>().HasData(
                 new User
                 {
                     Id = 1,
                     Type = "VET",
                     UserNick = "Frank",
-                    Pass = "Password",
                     Ruc = "A12345rf",
                     Dni = "70258688",
                     Phone = "946401234",
@@ -219,9 +218,28 @@ namespace GrupoWebBackend.Shared.Persistence.Context
                     DistrictId = 1
                     //PetId = 100
                 }
-            );*/
+            );
+            
+            builder.Entity<User>().HasData(
+                new User
+                {
+                    Id = 2,
+                    Type = "VET",
+                    UserNick = "Pablo",
+                    Ruc = "",
+                    Dni = "",
+                    Phone = "",
+                    Email = "frank@outlook.com",
+                    Name = "Francisco",
+                    LastName = "Marmol",
+                    DistrictId = 1
+                    //PetId = 100
+                }
+            );
+            
+            
             // Pet Sample Data
-            /*builder.Entity<Pet>().HasData
+            builder.Entity<Pet>().HasData
             (
                 new Pet
                 {
@@ -271,10 +289,10 @@ namespace GrupoWebBackend.Shared.Persistence.Context
                     UserId = 1,
                     PublicationId = 1
                 }
-            );*/
+            );
 
             //Advertisement Sample Data
-            /*builder.Entity<Advertisement>().HasData
+            builder.Entity<Advertisement>().HasData
             (
                 new Advertisement
                 {
@@ -287,11 +305,10 @@ namespace GrupoWebBackend.Shared.Persistence.Context
                     UrlToImage = "https://www.lasamarillasdezipaquira.com/oc-content/uploads/1/352.jpg",
                     Promoted = true
                 }
-            );*/
+            );
             //User SampleData
 
             //Publications SampleData
-            /*
             builder.Entity<Publication>().HasData
             (
                 new Publication()
@@ -319,7 +336,6 @@ namespace GrupoWebBackend.Shared.Persistence.Context
                     Comment = "this is a comment"
                 }
             );
-            */
 
             //AdoptionsRequests SampleData
 
