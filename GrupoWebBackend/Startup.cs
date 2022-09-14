@@ -38,6 +38,7 @@ using Microsoft.OpenApi.Models;
 using GrupoWebBackend.Shared.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 using GrupoWebBackend.DomainReport;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace GrupoWebBackend
 {
@@ -69,7 +70,7 @@ namespace GrupoWebBackend
             });
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo {Title = "GrupoWebBackend", Version = "v1"});
+                c.SwaggerDoc("v1", new OpenApiInfo {Title = "TimExp Backend", Version = "v1"});
                 c.EnableAnnotations();
             });
             
@@ -101,25 +102,26 @@ namespace GrupoWebBackend
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
             {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "GrupoWebBackend v1"));
-            }
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
 
-            // Apply CORS Policies
-            app.UseCors(p => p
+            // For this course purpose we allow Swagger in release mode.
+            app.UseForwardedHeaders();
+            app.UseDeveloperExceptionPage();
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TimExp Backend v1"));
+
+            app.UseCors(builder => builder
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader());
-            
-            // Integrate Error Handling Middleware
+
             app.UseMiddleware<ErrorHandlerMiddleware>();
-            
-            // Integrate JWT Authorization Middleware
+
             app.UseMiddleware<JwtMiddleware>();
-            
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
