@@ -15,5 +15,6 @@ namespace GrupoWebBackend.Security.Resources
         public string? UrlToImageBackground { get; set; }
         public string? UrlToImageProfile { get; set; }
         public bool IsAuthenticated { get; set; }
+        public bool IsReported { get; set; }
     }
 }

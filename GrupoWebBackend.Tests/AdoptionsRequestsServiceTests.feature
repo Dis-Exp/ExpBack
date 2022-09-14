@@ -7,11 +7,21 @@ So that it is available when the user make a adoption requests
 		And A User is already stored for AdoptionsRequests
 		| Id | Type | UserNick	| Ruc      | Dni      | Phone     | Email             | Name      | LastName | DistrictId |
 		| 1  | VET  | Frank		| A12345rf | 70258688 | 946401234 | frank@outlook.com | Francisco | Voularte | 1          |
+		And A Second User is already stored for AdoptionsRequests
+		  | Id | Type | UserNick | Ruc      | Dni      | Phone     | Email             | Name      | LastName | DistrictId |
+		  | 2  | VET  | Frank    | 	 | 	 | 	 | frank@outlook.com | Francisco | Voularte | 1          |
+		And A Pet already stored for AdoptionsRequests
+		  | Id | Type | UserNick | Ruc | Dni | Phone | Email             | Name      | LastName | DistrictId |
+		  | 2  | VET  | Frank    | 	   | 	 | 	     | frank@outlook.com | Francisco | Voularte | 1          |
+		And A Publication already stored for AdoptionsRequests
+		  | Id | Type | UserNick | Ruc | Dni | Phone | Email             | Name      | LastName | DistrictId |
+		  | 2  | VET  | Frank    | 	   | 	 | 	     | frank@outlook.com | Francisco | Voularte | 1          |
+    	
 @adoptionsrequests-adding
 	Scenario: A AdoptionsRequests is sent 
 		When A adoption request is sent
 		| message | status  | userIdFrom | userIdAt | publicationId |
-		| hello   | pending | 3           |1        |1              |
+		| hello   | pending | 1           |2        |1              |
 		Then A Response with Status 200 is received
 	Scenario: Add Adoption Request with empty data
 		When A post adoption request is sent

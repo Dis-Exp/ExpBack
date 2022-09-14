@@ -139,8 +139,8 @@ namespace GrupoWebBackend.Tests
                 table5.AddRow(new string[] {
                             "hello",
                             "pending",
-                            "3",
                             "1",
+                            "2",
                             "1"});
 #line 12
   testRunner.When("A adoption request is sent", ((string)(null)), table5, "When ");

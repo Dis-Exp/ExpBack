@@ -190,7 +190,7 @@ namespace GrupoWebBackend.Shared.Persistence.Context
                 .WithOne(p => p.Publication)
                 .HasForeignKey(p => p.PublicationId);
 */
-            /*builder.Entity<District>().HasData(
+            builder.Entity<District>().HasData(
                 new District
                 {
                     Id = 1,
@@ -201,7 +201,7 @@ namespace GrupoWebBackend.Shared.Persistence.Context
                     Id = 2,
                     DistrictName = "San Miguel"
                 }
-            );*/
+            );
 
             builder.Entity<User>().HasData(
                 new User
@@ -237,6 +237,23 @@ namespace GrupoWebBackend.Shared.Persistence.Context
                 }
             );
             
+            builder.Entity<User>().HasData(
+                new User
+                {
+                    Id = 3,
+                    Type = "VET",
+                    UserNick = "Macaco",
+                    Ruc = "101010",
+                    Dni = "101010",
+                    Phone = "987654321",
+                    Email = "frank@outlook.com",
+                    Name = "Macaco",
+                    LastName = "Macaco",
+                    DistrictId = 1
+                    //PetId = 100
+                }
+            );
+            
             
             // Pet Sample Data
             builder.Entity<Pet>().HasData
@@ -250,7 +267,7 @@ namespace GrupoWebBackend.Shared.Persistence.Context
                     Race = "Caninus",
                     Age = 2,
                     IsAdopted = true,
-                    UserId = -1,
+                    UserId = 4,
                     PublicationId = 2
                 },
                 new Pet
@@ -261,8 +278,8 @@ namespace GrupoWebBackend.Shared.Persistence.Context
                     Attention = "Required",
                     Race = "Catitus",
                     Age = 2,
-                    IsAdopted = true,
-                    UserId = 1,
+                    IsAdopted = false,
+                    UserId = 4,
                     PublicationId = 1
                 },
                 new Pet
@@ -273,8 +290,8 @@ namespace GrupoWebBackend.Shared.Persistence.Context
                     Attention = "No Required",
                     Race = "Catitus",
                     Age = 2,
-                    IsAdopted = true,
-                    UserId = 1,
+                    IsAdopted = false,
+                    UserId = 4,
                     PublicationId = 1
                 },
                 new Pet
@@ -285,8 +302,8 @@ namespace GrupoWebBackend.Shared.Persistence.Context
                     Attention = "No Required",
                     Race = "Catitus",
                     Age = 3,
-                    IsAdopted = true,
-                    UserId = 1,
+                    IsAdopted = false,
+                    UserId = 4,
                     PublicationId = 1
                 }
             );

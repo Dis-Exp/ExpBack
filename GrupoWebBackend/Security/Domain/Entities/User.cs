@@ -41,7 +41,7 @@ namespace GrupoWebBackend.Security.Domain.Entities
 
         public bool IsAuthenticated()
         {
-            return (this.Name != "" && this.LastName != "" && this.District != null && this.Phone != "" && this.Ruc != "" &&
+            return (this.Name != "" && this.LastName != "" && this.Phone != "" && this.Ruc != "" &&
                     this.Dni != "");
         }
 

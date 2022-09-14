@@ -33,7 +33,7 @@ namespace GrupoWebBackend.Tests
         [Given(@"The Endpoint https://localhost:(.*)/api/v(.*)/AdoptionsRequests is available")]
         public void GivenTheEndpointHttpsLocalhostApiVAdoptionsRequestsIsAvailable(int port, int version)
         {
-            _baseUri = new Uri($"https://localhost:{port}/api/v{version}/AdoptionsRequests");
+            _baseUri = new Uri($"https://webapp-220913180224.azurewebsites.net/api/v{version}/AdoptionsRequests");
             _client = _factory.CreateClient(new WebApplicationFactoryClientOptions{BaseAddress = _baseUri});
         }
         
@@ -43,16 +43,15 @@ namespace GrupoWebBackend.Tests
         {
             var resource = saveAdoptionsRequests.CreateSet<SaveAdoptionsRequestsResource>().First();
             var content = new StringContent(resource.ToJson(), Encoding.UTF8, MediaTypeNames.Application.Json);
-            Console.WriteLine("GAAAAAAAATO");
-            TestContext.WriteLine("GAAAATO");
             Response = _client.PostAsync(_baseUri, content);
         }
         [Then(@"A Response with Status (.*) is received")]
         public void ThenAResponseWithStatusIsReceived(int expectedStatus)
         {  
             var expectedStatusCode = ((HttpStatusCode) expectedStatus).ToString();
-            var actualStatuCode = Response.Result.StatusCode.ToString();
-            Assert.AreEqual(expectedStatusCode, actualStatuCode);
+            var actualStatusCode = Response.Result.Content.ReadAsStringAsync();
+            actualStatusCode.Wait();
+            Assert.AreEqual(expectedStatusCode, actualStatusCode.Result);
         }
 
 
