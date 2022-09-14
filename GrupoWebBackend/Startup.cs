@@ -125,7 +125,7 @@ namespace GrupoWebBackend
 
             app.UseMiddleware<JwtMiddleware>();
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
