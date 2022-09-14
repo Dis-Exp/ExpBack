@@ -81,7 +81,7 @@ namespace GrupoWebBackend.Tests
 #line 6
   testRunner.Given("The Endpoint https://localhost:5001/api/v1/Pets is available", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
                         "Id",
                         "Type",
                         "UserNick",
@@ -93,7 +93,7 @@ namespace GrupoWebBackend.Tests
                         "Name",
                         "LastName",
                         "DistrictId"});
-            table14.AddRow(new string[] {
+            table13.AddRow(new string[] {
                         "1000",
                         "VET",
                         "string",
@@ -106,7 +106,7 @@ namespace GrupoWebBackend.Tests
                         "Voularte",
                         "0"});
 #line 7
-  testRunner.And("A user is already stored", ((string)(null)), table14, "And ");
+  testRunner.And("A user is already stored", ((string)(null)), table13, "And ");
 #line hidden
         }
         
@@ -132,7 +132,7 @@ this.ScenarioInitialize(scenarioInfo);
 #line 5
  this.FeatureBackground();
 #line hidden
-                TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
                             "Type",
                             "Name",
                             "Attention",
@@ -141,7 +141,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "IsAdopted",
                             "UserId",
                             "PublicationId"});
-                table15.AddRow(new string[] {
+                table14.AddRow(new string[] {
                             "Can",
                             "Lolo",
                             "Yes",
@@ -151,7 +151,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "1",
                             "1"});
 #line 12
- testRunner.When("A Post Request is sent", ((string)(null)), table15, "When ");
+ testRunner.When("A Post Request is sent", ((string)(null)), table14, "When ");
 #line hidden
 #line 15
  testRunner.Then("A Response With Status 200 is received", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -180,7 +180,7 @@ this.ScenarioInitialize(scenarioInfo);
 #line 5
  this.FeatureBackground();
 #line hidden
-                TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
                             "Type",
                             "Name",
                             "Attention",
@@ -189,7 +189,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "IsAdopted",
                             "UserId",
                             "PublicationId"});
-                table16.AddRow(new string[] {
+                table15.AddRow(new string[] {
                             "Can",
                             "Lolo",
                             "Yes",
@@ -199,7 +199,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "3",
                             "1"});
 #line 18
- testRunner.When("A Post Request is sent", ((string)(null)), table16, "When ");
+ testRunner.When("A Post Request is sent", ((string)(null)), table15, "When ");
 #line hidden
 #line 21
  testRunner.Then("A Response With Status 400 is received", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");

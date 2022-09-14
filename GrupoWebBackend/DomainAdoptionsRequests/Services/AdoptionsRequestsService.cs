@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using GrupoWebBackend.DomainAdoptionsRequests.Domain.Services.Communications;
 using GrupoWebBackend.DomainPublications.Domain.Repositories;
+using GrupoWebBackend.DomainReport;
 using GrupoWebBackend.Security.Domain.Repositories;
 using GrupoWebBackend.Shared.Domain.Repositories;
 using Microsoft.AspNetCore.Http;
@@ -26,6 +27,7 @@ namespace GrupoWebBackend.DomainAdoptionsRequests.Services
         
         private readonly IPublicationRepository _publicationRepository;
         private readonly IUserRepository _userRepository;
+        private readonly IReportRepository _reportRepository;
 
         public AdoptionsRequestsService(IAdoptionsRequestsRepository adoptionsRequestsRepository,
             IPublicationRepository publicationRepository,
@@ -62,6 +64,7 @@ namespace GrupoWebBackend.DomainAdoptionsRequests.Services
           
           if (!existingUser.IsAuthenticated())
               return new SaveAdoptionsRequestsResponse(false, "This user is not authenticated.", adoptionsRequest);
+
           if (existingUser.IsReported())
               return new SaveAdoptionsRequestsResponse(false, "This user has at least one report.", adoptionsRequest);
           
