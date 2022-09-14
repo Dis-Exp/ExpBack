@@ -68,8 +68,8 @@ namespace GrupoWebBackend
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
             services.AddDbContext<AppDbContext>(options =>
             {
-                //options.UseInMemoryDatabase("GrupoWebBackend-api-in-memory");
-                options.UseMySQL("server=localhost; user=timexp; database=timexp; password=XempreDB; port=3306");
+                options.UseInMemoryDatabase("GrupoWebBackend-api-in-memory");
+                //options.UseMySQL("server=localhost; user=timexp; database=timexp; password=XempreDB; port=3306");
             });
             services.AddSwaggerGen(c =>
             {

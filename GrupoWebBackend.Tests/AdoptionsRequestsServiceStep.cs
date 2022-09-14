@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -6,6 +7,9 @@ using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 using GrupoWebBackend.DomainAdoptionsRequests.Resources;
+using GrupoWebBackend.DomainPets.Resources;
+using GrupoWebBackend.DomainPublications.Resources;
+using GrupoWebBackend.Security.Domain.Services.Communication;
 using Microsoft.AspNetCore.Mvc.Testing;
 using NUnit.Framework;
 using SpecFlow.Internal.Json;
@@ -17,23 +21,25 @@ using Newtonsoft.Json;
 namespace GrupoWebBackend.Tests
 {
     [Binding]
-    public class AdoptiosRequestsServiceStep:WebApplicationFactory<Startup>
+    public class AdoptionsRequestsServiceStep:WebApplicationFactory<Startup>
     {
         private readonly WebApplicationFactory<Startup>_factory;
         private HttpClient _client;
         private Uri _baseUri;
         private AdoptionsRequestsResource AdoptionsRequests { get; set; }
         private Task<HttpResponseMessage> Response { get; set; }
-        private UserResource User { get; set; }
+        private RegisterRequest User { get; set; }
+        private PetResource Pet { get; set; }
+        private PublicationResource Publication { get; set; }
 
-        public AdoptiosRequestsServiceStep(WebApplicationFactory<Startup> factory)
+        public AdoptionsRequestsServiceStep(WebApplicationFactory<Startup> factory)
         {
             _factory = factory;
         }
         [Given(@"The Endpoint https://localhost:(.*)/api/v(.*)/AdoptionsRequests is available")]
         public void GivenTheEndpointHttpsLocalhostApiVAdoptionsRequestsIsAvailable(int port, int version)
         {
-            _baseUri = new Uri($"https://webapp-220913180224.azurewebsites.net/api/v{version}/AdoptionsRequests");
+            _baseUri = new Uri($"https://localhost:{port}/api/v{version}"+"/AdoptionsRequests");
             _client = _factory.CreateClient(new WebApplicationFactoryClientOptions{BaseAddress = _baseUri});
         }
         
@@ -49,23 +55,62 @@ namespace GrupoWebBackend.Tests
         public void ThenAResponseWithStatusIsReceived(int expectedStatus)
         {  
             var expectedStatusCode = ((HttpStatusCode) expectedStatus).ToString();
-            var actualStatusCode = Response.Result.Content.ReadAsStringAsync();
-            actualStatusCode.Wait();
-            Assert.AreEqual(expectedStatusCode, actualStatusCode.Result);
+            var actualStatusCode = Response.Result.StatusCode.ToString();
+            Assert.AreEqual(expectedStatusCode, actualStatusCode);
         }
 
 
         [Given(@"A User is already stored for AdoptionsRequests")]
         public async void GivenAUserIsAlreadyStoredForAdoptionsRequests(Table saveUserResourceData)
         {
-            var saveUserResource = saveUserResourceData.CreateSet<SaveAdoptionsRequestsResource>().First();
-            var userUri = new Uri("https://localhost:5001/api/v1/Users");
+            var saveUserResource = saveUserResourceData.CreateSet<RegisterRequest>().First();
+            var userUri = new Uri("https://localhost:5001/api/v1/users/auth/sign-up");
             var content = new StringContent(saveUserResource.ToJson(), Encoding.UTF8, MediaTypeNames.Application.Json);
             var userResponse = _client.PostAsync(userUri, content);
             var userResponseData = await userResponse.Result.Content.ReadAsStringAsync();
-            var existingUser = JsonConvert.DeserializeObject<UserResource> (userResponseData);
-            User = existingUser;
+            /*var existingUser = JsonConvert.DeserializeObject<RegisterRequest> (userResponseData);*/
+            Debug.WriteLine(saveUserResource.ToJson());
+            Debug.WriteLine(content);
+            /*User = existingUser;*/
         }
+        
+        [Given(@"A Second User is already stored for AdoptionsRequests")]
+        public async void GivenASecondUserIsAlreadyStoredForAdoptionsRequests(Table saveUserResourceData)
+        {
+            var saveUserResource = saveUserResourceData.CreateSet<RegisterRequest>().First();
+            var userUri = new Uri("https://localhost:5001/api/v1/users/auth/sign-up");
+            var content = new StringContent(saveUserResource.ToJson(), Encoding.UTF8, MediaTypeNames.Application.Json);
+            var userResponse =  _client.PostAsync(userUri, content);
+            var userResponseData = await userResponse.Result.Content.ReadAsStringAsync();
+            /*var existingUser = JsonConvert.DeserializeObject<RegisterRequest> (userResponseData);
+            User = existingUser;*/
+        }
+        
+        [Given(@"A Pet already stored for AdoptionsRequests")]
+        public async void GivenAPetAlreadyStoredForAdoptionsRequests(Table savePetResourceData)
+        {
+            var savePetResource = savePetResourceData.CreateSet<SavePetResource>().First();
+            var petUri = new Uri("https://localhost:5001/api/v1/Pets");
+            var content = new StringContent(savePetResource.ToJson(), Encoding.UTF8, MediaTypeNames.Application.Json);
+            var petResponse =  _client.PostAsync(petUri, content);
+            var petResponseData = await petResponse.Result.Content.ReadAsStringAsync();
+            var existingPet = JsonConvert.DeserializeObject<PetResource> (petResponseData);
+            Pet = existingPet;
+        }
+
+        [Given(@"A Publication already stored for AdoptionsRequests")]
+        public async void GivenAPublicationAlreadyStoredForAdoptionsRequests(Table savePublicationResourceData)
+        {
+            var savePublicationResource = savePublicationResourceData.CreateSet<SavePublicationResource>().First();
+            var publicationUri = new Uri("https://localhost:5001/api/v1/Publications");
+            var content = new StringContent(savePublicationResource.ToJson(), Encoding.UTF8, MediaTypeNames.Application.Json);
+            var publicationResponse =  _client.PostAsync(publicationUri, content);
+            var publicationResponseData = await publicationResponse.Result.Content.ReadAsStringAsync();
+            var existingPublication = JsonConvert.DeserializeObject<PublicationResource> (publicationResponseData);
+            Debug.WriteLine("GATO");
+            Publication = existingPublication;
+        }
+        
 
         [Then(@"AAdoptionRequests With Status (.*) is received")]
         public void ThenAAdoptionRequestsWithStatusIsReceived(int  expectedStatus)
@@ -102,5 +147,8 @@ namespace GrupoWebBackend.Tests
             var content = new StringContent(resource.ToJson(), Encoding.UTF8, "application/json");
             Response = _client.PutAsync(_baseUri, content);
         }
+
+
+
     }
 }

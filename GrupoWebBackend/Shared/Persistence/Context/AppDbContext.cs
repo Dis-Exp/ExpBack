@@ -109,7 +109,7 @@ namespace GrupoWebBackend.Shared.Persistence.Context
             //builder.Entity<AdoptionsRequests>().Property(p => p.Status).HasMaxLength(30).IsRequired();
             builder.Entity<AdoptionsRequests>().Property(p =>p.UserIdFrom).IsRequired();
             builder.Entity<AdoptionsRequests>().Property(p => p.UserIdAt).IsRequired();
-            builder.Entity<AdoptionsRequests>().Property(p =>p.PublicationId).IsRequired(false);
+            builder.Entity<AdoptionsRequests>().Property(p =>p.PublicationId).IsRequired();
             // Districts
             builder.Entity<District>().ToTable("Districts");
             builder.Entity<District>().HasKey(p => p.Id);

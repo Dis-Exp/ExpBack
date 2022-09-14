@@ -13,9 +13,9 @@ namespace GrupoWebBackend.DomainAdoptionsRequests.Domain.Models
         public int UserIdFrom { get; set; }
         public int UserIdAt { get; set; }
         public User User { get; set; }
+        public int PublicationId { get; set; }
+        
         [AllowNull]
-        public int? PublicationId { get; set; }
-
         public Publication Publication { get; set; }
     }
 }

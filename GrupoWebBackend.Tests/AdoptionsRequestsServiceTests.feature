@@ -5,23 +5,23 @@ So that it is available when the user make a adoption requests
 	Background: 
 		Given The Endpoint https://localhost:5001/api/v1/AdoptionsRequests is available
 		And A User is already stored for AdoptionsRequests
-		| Id | Type | UserNick	| Ruc      | Dni      | Phone     | Email             | Name      | LastName | DistrictId |
-		| 1  | VET  | Frank		| A12345rf | 70258688 | 946401234 | frank@outlook.com | Francisco | Voularte | 1          |
+		| Id | Type | UserNick | Ruc      | Dni      | Phone     | Email             | Name      | LastName  | Pass |
+		| 1  | VET  | Frank    | A12345rf | 70258688 | 946401234 | frank@outlook.com | Francisco | Voularte  |  123456    |
 		And A Second User is already stored for AdoptionsRequests
-		  | Id | Type | UserNick | Ruc      | Dni      | Phone     | Email             | Name      | LastName | DistrictId |
-		  | 2  | VET  | Frank    | 	 | 	 | 	 | frank@outlook.com | Francisco | Voularte | 1          |
+		| Id | Type | UserNick | Ruc | Dni | Phone | Email             | Name      | LastName | DistrictId | Pass |
+		| 2  | VET  | Frank    |     |     |       | frank@outlook.com | Francisco | Voularte | 1          |  123456 |
 		And A Pet already stored for AdoptionsRequests
-		  | Id | Type | UserNick | Ruc | Dni | Phone | Email             | Name      | LastName | DistrictId |
-		  | 2  | VET  | Frank    | 	   | 	 | 	     | frank@outlook.com | Francisco | Voularte | 1          |
+		| Id | Type | Name | Attention | Race | Age | isAdopted             | UserId      | PublicationId |
+		| 101| Cat  | Lolo |Required   | 	Catitus | 	2     | false | 1 | 1 |
 		And A Publication already stored for AdoptionsRequests
-		  | Id | Type | UserNick | Ruc | Dni | Phone | Email             | Name      | LastName | DistrictId |
-		  | 2  | VET  | Frank    | 	   | 	 | 	     | frank@outlook.com | Francisco | Voularte | 1          |
+		| Id | UserId | DateTime | PetId | Comment | 
+		| 1  | 2  | 29/09/2021    | 101  | Comentario	 |
     	
 @adoptionsrequests-adding
 	Scenario: A AdoptionsRequests is sent 
 		When A adoption request is sent
-		| message | status  | userIdFrom | userIdAt | publicationId |
-		| hello   | pending | 1           |2        |1              |
+		| Message | Status  | UserIdFrom | UserIdAt | PublicationId |
+		| hello   | pending | 1          | 3        |1              |
 		Then A Response with Status 200 is received
 	Scenario: Add Adoption Request with empty data
 		When A post adoption request is sent

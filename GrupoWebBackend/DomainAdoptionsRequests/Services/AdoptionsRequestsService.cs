@@ -50,15 +50,15 @@ namespace GrupoWebBackend.DomainAdoptionsRequests.Services
 */
       public async Task<SaveAdoptionsRequestsResponse> AddAsync(AdoptionsRequests adoptionsRequest)
       {
-          var existingPublication = _publicationRepository.FindByUserId(adoptionsRequest.UserIdFrom);
+          var existingPublication =  await _publicationRepository.FindByIdAsync(adoptionsRequest.PublicationId);
           
           if (existingPublication == null)
-              return new SaveAdoptionsRequestsResponse(false, "Invalid User.", adoptionsRequest);
+              return new SaveAdoptionsRequestsResponse(false, "Invalid Publication.", adoptionsRequest);
            
           var existingUser = await _userRepository.FindByIdAsync(adoptionsRequest.UserIdFrom);
           
           if (existingUser == null)
-              return new SaveAdoptionsRequestsResponse(false, "Invalid User.", adoptionsRequest);
+              return new SaveAdoptionsRequestsResponse(false, existingPublication.Comment, adoptionsRequest);
           
           if (!existingUser.IsAuthenticated())
               return new SaveAdoptionsRequestsResponse(false, "This user is not authenticated.", adoptionsRequest);

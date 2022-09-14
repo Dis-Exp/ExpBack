@@ -18,7 +18,7 @@ namespace GrupoWebBackend.DomainAdoptionsRequests.Resources
         [Required]
         public int UserIdAt { get; set; }
           
-        public int? PublicationId { get; set; }
+        public int PublicationId { get; set; }
 
     }
 }
