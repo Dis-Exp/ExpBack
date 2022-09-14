@@ -27,7 +27,7 @@ namespace GrupoWebBackend.Security.Persistence.Repositories
 
         public async Task<User> FindByIdAsync(int id)
         {
-            return await _context.Users.FindAsync(id);
+            return await _context.Users.Include(u => u.Reports).FirstOrDefaultAsync(u => u.Id == id);
         }
 
         public async Task<User> FindByUsernameAsync(string username)

@@ -31,13 +31,13 @@ namespace GrupoWebBackend.DomainAdoptionsRequests.Services
 
         public AdoptionsRequestsService(IAdoptionsRequestsRepository adoptionsRequestsRepository,
             IPublicationRepository publicationRepository,
-            IUnitOfWork unitOfWork, IUserRepository userRepository)
+            IUnitOfWork unitOfWork, IUserRepository userRepository, IReportRepository reportRepository)
         {
             _requestsAdoptionsRepository = adoptionsRequestsRepository;
             _unitOfWork = unitOfWork;
             _publicationRepository = publicationRepository;
             _userRepository = userRepository;
-
+            _reportRepository = reportRepository;
         }
 
         public async Task<IEnumerable<AdoptionsRequests>> ListAdoptionsRequestsAsync()
@@ -56,6 +56,7 @@ namespace GrupoWebBackend.DomainAdoptionsRequests.Services
           
           if (existingPublication == null)
               return new SaveAdoptionsRequestsResponse(false, "Invalid Publication.", adoptionsRequest);
+
            
           var existingUser = await _userRepository.FindByIdAsync(adoptionsRequest.UserIdFrom);
           

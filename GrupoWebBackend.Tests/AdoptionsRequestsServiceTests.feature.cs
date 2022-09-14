@@ -159,9 +159,15 @@ namespace GrupoWebBackend.Tests
   testRunner.And("A Third User is already stored for AdoptionsRequests", ((string)(null)), table6, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
-                        "UserId"});
+                        "UserId",
+                        "Type",
+                        "Description",
+                        "DateTime"});
             table7.AddRow(new string[] {
-                        "1"});
+                        "3",
+                        "Acoso",
+                        "Testing",
+                        "14/09/2022 11:35"});
 #line 16
   testRunner.And("A Report already stored for AdoptionsRequests", ((string)(null)), table7, "And ");
 #line hidden

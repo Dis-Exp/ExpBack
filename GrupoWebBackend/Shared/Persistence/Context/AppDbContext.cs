@@ -133,11 +133,6 @@ namespace GrupoWebBackend.Shared.Persistence.Context
                 .WithMany(p => p.Reports)
                 .HasForeignKey(p => p.UserId);
 
-            builder.Entity<User>().HasMany(p => p.Reports)
-                .WithOne(p => p.User)
-                .HasForeignKey(p => p.UserId);
-
-
             // District Relationship
             builder.Entity<District>().HasMany(p => p.User)
                 .WithOne(p => p.District)

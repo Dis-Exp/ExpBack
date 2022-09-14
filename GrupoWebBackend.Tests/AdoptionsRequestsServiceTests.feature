@@ -14,8 +14,8 @@ So that it is available when the user make a adoption requests
 		| Id | Type | UserNick | Ruc      | Dni      | Phone     | Email             | Name      | LastName | Pass    |
 		| 3  | VET  | Pablin    | A12345 | 70258688 | 946401234 | pablin@outlook.com | Pablo | Marmol |  123456 |
 		And A Report already stored for AdoptionsRequests
-		| UserId  	| 
-		| 1 		|
+		| UserId | Type  | Description | DateTime         |
+		| 3      | Acoso | Testing     | 14/09/2022 11:35 |
 		And A Pet already stored for AdoptionsRequests
 		| Id | Type | Name | Attention | Race | Age | isAdopted             | UserId      | PublicationId |
 		| 101| Cat  | Lolo |Required   | 	Catitus | 	2     | false | 1 | 1 |

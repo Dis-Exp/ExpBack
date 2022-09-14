@@ -153,8 +153,6 @@ namespace GrupoWebBackend.Tests
             var content = new StringContent(saveReportResource.ToJson(), Encoding.UTF8, MediaTypeNames.Application.Json);
             var reportResponse =  _client.PostAsync(reportUri, content);
             var reportResponseData = await reportResponse.Result.Content.ReadAsStringAsync();
-            /*var existingReport = JsonConvert.DeserializeObject<ReportResource> (reportResponseData);
-            Report = existingReport;*/
         }
 
         [When(@"A adoption request is sent from not Authenticated User")]
