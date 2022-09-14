@@ -124,8 +124,8 @@ namespace GrupoWebBackend.Tests
         public void ThenAAdoptionRequestsWithStatusIsReceived(int  expectedStatus)
         {
             var expectedStatusCode = ((HttpStatusCode) expectedStatus).ToString();
-            var actualStatuCode = Response.Result.StatusCode.ToString();
-            Assert.AreEqual(expectedStatusCode, actualStatuCode);
+            var actualStatusCode = Response.Result.StatusCode.ToString();
+            Assert.AreEqual(expectedStatusCode, actualStatusCode);
         }
 
         [When(@"A post adoption request is sent")]
@@ -172,5 +172,24 @@ namespace GrupoWebBackend.Tests
         }
 
 
+        [Then(@"A Response with Message and Status (.*) is received")]
+        public async void ThenAResponseWithMessageAndStatusIsReceived(int expectedStatus)
+        {
+            var expectedStatusCode = ((HttpStatusCode) expectedStatus).ToString();
+            var actualMessage = await Response.Result.Content.ReadAsStringAsync();
+            var actualStatusCode = Response.Result.StatusCode.ToString();
+            Assert.AreEqual(expectedStatusCode, actualStatusCode);
+            Assert.AreEqual("This user is not authenticated.", actualMessage);
+        }
+
+        [Then(@"A Response with Message ""(.*)"" and Status (.*) is received")]
+        public async void ThenAResponseWithMessageAndStatusIsReceived(string expectedMessage, int expectedStatus)
+        {
+            var expectedStatusCode = ((HttpStatusCode) expectedStatus).ToString();
+            var actualMessage = await Response.Result.Content.ReadAsStringAsync();
+            var actualStatusCode = Response.Result.StatusCode.ToString();
+            Assert.AreEqual(expectedStatusCode, actualStatusCode);
+            Assert.AreEqual(expectedMessage, actualMessage);
+        }
     }
 }

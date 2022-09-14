@@ -30,6 +30,11 @@ namespace GrupoWebBackend.DomainAdoptionsRequests.Persistence.Repositories
         {
             return await _context.AdoptionsRequests.FindAsync(id);
         }
+        
+        public async Task<IEnumerable<AdoptionsRequests>> FindByUserId(int id)
+        {
+            return await _context.AdoptionsRequests.Where(ar => ar.UserIdFrom == id).ToListAsync();
+        }
 
         public void Update(AdoptionsRequests adoptionsRequests)
         {

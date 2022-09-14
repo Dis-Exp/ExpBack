@@ -56,7 +56,12 @@ namespace GrupoWebBackend.DomainAdoptionsRequests.Services
           
           if (existingPublication == null)
               return new SaveAdoptionsRequestsResponse(false, "Invalid Publication.", adoptionsRequest);
-
+          
+          var existingAdoptionRequest =  await _requestsAdoptionsRepository.FindByIdAsync(adoptionsRequest.UserIdFrom);
+          
+          if (existingAdoptionRequest!=null)
+              return new SaveAdoptionsRequestsResponse(false, "This user already has an existing adoption request.", adoptionsRequest);
+          
            
           var existingUser = await _userRepository.FindByIdAsync(adoptionsRequest.UserIdFrom);
           

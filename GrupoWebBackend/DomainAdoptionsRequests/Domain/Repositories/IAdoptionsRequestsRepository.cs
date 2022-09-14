@@ -11,6 +11,8 @@ namespace GrupoWebBackend.DomainAdoptionsRequests.Domain.Repositories
         Task AddAsync(AdoptionsRequests adoptionsRequests);
 
         Task<AdoptionsRequests> FindByIdAsync(int id);
+        
+        Task<IEnumerable<AdoptionsRequests>> FindByUserId(int id);
 
         void Update(AdoptionsRequests adoptionsRequests);
         

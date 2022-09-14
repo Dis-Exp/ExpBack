@@ -249,7 +249,8 @@ namespace GrupoWebBackend.Tests
   testRunner.When("A adoption request is sent from not Authenticated User", ((string)(null)), table10, "When ");
 #line hidden
 #line 31
-  testRunner.Then("A Response with Status 400 is received", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+  testRunner.Then("A Response with Message \"This user is not authenticated.\" and Status 400 is recei" +
+                        "ved", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -291,7 +292,8 @@ namespace GrupoWebBackend.Tests
   testRunner.When("A adoption request is sent from Reported User", ((string)(null)), table11, "When ");
 #line hidden
 #line 36
-  testRunner.Then("A Response with Status 400 is received", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+  testRunner.Then("A Response with Message \"This user has at least one report.\" and Status 400 is re" +
+                        "ceived", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -334,6 +336,51 @@ namespace GrupoWebBackend.Tests
 #line hidden
 #line 41
   testRunner.Then("A Response with Status 200 is received", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("A AdoptionsRequests is sent from Authenticated and not Reported User another time" +
+            "")]
+        public void AAdoptionsRequestsIsSentFromAuthenticatedAndNotReportedUserAnotherTime()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("A AdoptionsRequests is sent from Authenticated and not Reported User another time" +
+                    "", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 42
+ this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 5
+ this.FeatureBackground();
+#line hidden
+                TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Message",
+                            "Status",
+                            "UserIdFrom",
+                            "UserIdAt",
+                            "PublicationId"});
+                table13.AddRow(new string[] {
+                            "hello",
+                            "pending",
+                            "1",
+                            "2",
+                            "1"});
+#line 43
+  testRunner.When("A adoption request is sent", ((string)(null)), table13, "When ");
+#line hidden
+#line 46
+  testRunner.Then("A Response with Message \"This user already has an existing adoption request.\" and" +
+                        " Status 400 is received", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

@@ -28,17 +28,22 @@ So that it is available when the user make a adoption requests
 		When A adoption request is sent from not Authenticated User
 		  | Message | Status  | UserIdFrom | UserIdAt | PublicationId |
 		  | hello   | pending | 2          | 1        |1              |
-		Then A Response with Status 400 is received
+		Then A Response with Message "This user is not authenticated." and Status 400 is received
 	Scenario: A AdoptionsRequests is sent from Reported User
 		When A adoption request is sent from Reported User
 		  | Message | Status  | UserIdFrom | UserIdAt | PublicationId |
 		  | hello   | pending | 3          | 1        |1              |
-		Then A Response with Status 400 is received
+		Then A Response with Message "This user has at least one report." and Status 400 is received
 	Scenario: A AdoptionsRequests is sent from Authenticated and not Reported User 
 		When A adoption request is sent
 		| Message | Status  | UserIdFrom | UserIdAt | PublicationId |
 		| hello   | pending | 1          | 2        |1              |
 		Then A Response with Status 200 is received
+	Scenario: A AdoptionsRequests is sent from Authenticated and not Reported User another time
+		When A adoption request is sent
+		  | Message | Status  | UserIdFrom | UserIdAt | PublicationId |
+		  | hello   | pending | 1          | 2        |1              |
+		Then A Response with Message "This user already has an existing adoption request." and Status 400 is received
 		
 #	Scenario: Add Adoption Request with empty data
 #		When A post adoption request is sent
