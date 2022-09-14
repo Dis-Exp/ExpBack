@@ -10,7 +10,7 @@ namespace GrupoWebBackend.Extensions
             {
                 entity.SetTableName(entity.GetTableName().ToSnakeCase());
                 
-                foreach (var property in entity.GetProperties()) property.SetColumnName(property.GetColumnName().ToSnakeCase());
+                foreach (var property in entity.GetProperties()) property.SetColumnName(property.GetColumnBaseName().ToSnakeCase());
                 
                 foreach (var key in entity.GetKeys()) key.SetName(key.GetName());
 
