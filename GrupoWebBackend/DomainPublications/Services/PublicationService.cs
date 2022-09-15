@@ -7,6 +7,7 @@ using GrupoWebBackend.DomainPublications.Domain.Repositories;
 using GrupoWebBackend.DomainPublications.Domain.Services;
 using GrupoWebBackend.DomainPublications.Domain.Services.Communications;
 using GrupoWebBackend.DomainPublications.Resources;
+using GrupoWebBackend.Security.Domain.Repositories;
 using GrupoWebBackend.Shared.Domain.Repositories;
 
 namespace GrupoWebBackend.DomainPublications.Services
@@ -16,12 +17,13 @@ namespace GrupoWebBackend.DomainPublications.Services
         private readonly IPublicationRepository _publicationRepository;
         //private readonly IUserRepository _userRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IUserRepository _userRepository;
 
-        public PublicationService(IPublicationRepository publicationRepository,IUnitOfWork unitOfWork)
+        public PublicationService(IPublicationRepository publicationRepository,IUnitOfWork unitOfWork, IUserRepository userRepository)
         {
             _publicationRepository = publicationRepository;
             _unitOfWork = unitOfWork;
-            //_userRepository = userRepository;
+            _userRepository = userRepository;
         }
         public async Task<IEnumerable<Publication>> ListPublicationAsync()
         {
@@ -32,22 +34,33 @@ namespace GrupoWebBackend.DomainPublications.Services
             return await _publicationRepository.FindByUserId(userId);
         }
 
-        public async Task<PublicationResponse> SaveAsync(Publication publication)
+        public async Task<SavePublicationResponse> SaveAsync(Publication publication)
         { 
            
-            var existingUser = _publicationRepository.FindByUserId(publication.UserId);
+            var existingUserPublication = _publicationRepository.FindByUserId(publication.UserId);
+            if (existingUserPublication == null)
+                return new SavePublicationResponse("invalid user");
+            
+            var existingUser = await _userRepository.FindByIdAsync(publication.UserId);
+          
             if (existingUser == null)
-                return new PublicationResponse("invalid user");
+                return new SavePublicationResponse(false, "This user does not exist", publication);
+            
+            if (existingUser.IsReported())
+                return new SavePublicationResponse(false, "This user has at least one report.", publication);
+            
+            if(existingUser.Subscription == null)
+                return new SavePublicationResponse(false, "This user not have a subscription.", publication);
             
             try
             {
                 await _publicationRepository.AddAsync(publication);
                 await _unitOfWork.CompleteAsync();
-                return new PublicationResponse(publication);
+                return new SavePublicationResponse(publication);
             }
             catch (Exception e)
             {
-                return new PublicationResponse($"An error occurred while saving the Publication: {e.Message}");
+                return new SavePublicationResponse($"An error occurred while saving the Publication: {e.Message}");
             }
         }
 

@@ -10,7 +10,7 @@ namespace GrupoWebBackend.DomainPublications.Domain.Services
     {
         Task<IEnumerable<Publication>> ListPublicationAsync();
         Task<IEnumerable<Publication>> ListByUserId(int userId);
-        Task<PublicationResponse> SaveAsync(Publication publication);
+        Task<SavePublicationResponse> SaveAsync(Publication publication);
         Task<Publication> FindByIdAsync(int id);
         Task<PublicationResponse> UpdateAsync(int id, Publication publication);
         Task<PublicationResponse> DeleteAsync(int id);

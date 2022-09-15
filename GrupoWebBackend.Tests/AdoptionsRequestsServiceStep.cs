@@ -54,8 +54,8 @@ namespace GrupoWebBackend.Tests
             var userResponse = _client.PostAsync(userUri, content);
             var userResponseData = await userResponse.Result.Content.ReadAsStringAsync();
             /*var existingUser = JsonConvert.DeserializeObject<RegisterRequest> (userResponseData);*/
-            Debug.WriteLine(saveUserResource.ToJson());
-            Debug.WriteLine(content);
+            /*Debug.WriteLine(saveUserResource.ToJson());
+            Debug.WriteLine(content);*/
             /*User = existingUser;*/
         }
         
@@ -101,39 +101,8 @@ namespace GrupoWebBackend.Tests
             var content = new StringContent(savePublicationResource.ToJson(), Encoding.UTF8, MediaTypeNames.Application.Json);
             var publicationResponse =  _client.PostAsync(publicationUri, content);
             var publicationResponseData = await publicationResponse.Result.Content.ReadAsStringAsync();
-            var existingPublication = JsonConvert.DeserializeObject<PublicationResource> (publicationResponseData);
-            Publication = existingPublication;
-        }
-        
-        [When(@"A adoption request is sent")]
-        public void WhenAAdoptionRequestIsSent(Table saveAdoptionsRequests)
-        {
-            var resource = saveAdoptionsRequests.CreateSet<SaveAdoptionsRequestsResource>().First();
-            var content = new StringContent(resource.ToJson(), Encoding.UTF8, MediaTypeNames.Application.Json);
-            Response = _client.PostAsync(_baseUri, content);
-        }
-        [Then(@"A Response with Status (.*) is received")]
-        public void ThenAResponseWithStatusIsReceived(int expectedStatus)
-        {  
-            var expectedStatusCode = ((HttpStatusCode) expectedStatus).ToString();
-            var actualStatusCode = Response.Result.StatusCode.ToString();
-            Assert.AreEqual(expectedStatusCode, actualStatusCode);
-        }
-
-        [Then(@"AAdoptionRequests With Status (.*) is received")]
-        public void ThenAAdoptionRequestsWithStatusIsReceived(int  expectedStatus)
-        {
-            var expectedStatusCode = ((HttpStatusCode) expectedStatus).ToString();
-            var actualStatusCode = Response.Result.StatusCode.ToString();
-            Assert.AreEqual(expectedStatusCode, actualStatusCode);
-        }
-
-        [When(@"A post adoption request is sent")]
-        public void WhenAPostAdoptionRequestIsSent(Table saveAdoptionsRequestsResource)
-        {
-            var resource = saveAdoptionsRequestsResource.CreateSet<SaveAdoptionsRequestsResource>().First();
-            var content = new StringContent(resource.ToJson(), Encoding.UTF8, MediaTypeNames.Application.Json);
-            Response = _client.PostAsync(_baseUri, content);
+            /*var existingPublication = JsonConvert.DeserializeObject<PublicationResource> (publicationResponseData);
+            Publication = existingPublication;*/
         }
 
         [Given(@"the endpoint https://localhost:(.*)/api/v(.*)/AdoptionsRequests/(.*) is available")]
@@ -158,9 +127,11 @@ namespace GrupoWebBackend.Tests
         [When(@"A adoption request is sent from not Authenticated User")]
         public void WhenAAdoptionRequestIsSentFromNotAuthenticatedUser(Table saveAdoptionsRequests)
         {
+            Debug.WriteLine("GATO");
             var resource = saveAdoptionsRequests.CreateSet<SaveAdoptionsRequestsResource>().First();
             var content = new StringContent(resource.ToJson(), Encoding.UTF8, MediaTypeNames.Application.Json);
             Response = _client.PostAsync(_baseUri, content);
+            Debug.WriteLine("GAAAATO");
         }
 
         [When(@"A adoption request is sent from Reported User")]
@@ -170,16 +141,29 @@ namespace GrupoWebBackend.Tests
             var content = new StringContent(resource.ToJson(), Encoding.UTF8, MediaTypeNames.Application.Json);
             Response = _client.PostAsync(_baseUri, content);
         }
-
-
-        [Then(@"A Response with Message and Status (.*) is received")]
-        public async void ThenAResponseWithMessageAndStatusIsReceived(int expectedStatus)
+        
+        [When(@"A adoption request is sent")]
+        public void WhenAAdoptionRequestIsSent(Table saveAdoptionsRequests)
         {
+            var resource = saveAdoptionsRequests.CreateSet<SaveAdoptionsRequestsResource>().First();
+            var content = new StringContent(resource.ToJson(), Encoding.UTF8, MediaTypeNames.Application.Json);
+            Response = _client.PostAsync(_baseUri, content);
+        }
+        
+        [Then(@"A Response with Status (.*) is received")]
+        public void ThenAResponseWithStatusIsReceived(int expectedStatus)
+        {  
             var expectedStatusCode = ((HttpStatusCode) expectedStatus).ToString();
-            var actualMessage = await Response.Result.Content.ReadAsStringAsync();
             var actualStatusCode = Response.Result.StatusCode.ToString();
             Assert.AreEqual(expectedStatusCode, actualStatusCode);
-            Assert.AreEqual("This user is not authenticated.", actualMessage);
+        }
+
+        [Then(@"AAdoptionRequests With Status (.*) is received")]
+        public void ThenAAdoptionRequestsWithStatusIsReceived(int  expectedStatus)
+        {
+            var expectedStatusCode = ((HttpStatusCode) expectedStatus).ToString();
+            var actualStatusCode = Response.Result.StatusCode.ToString();
+            Assert.AreEqual(expectedStatusCode, actualStatusCode);
         }
 
         [Then(@"A Response with Message ""(.*)"" and Status (.*) is received")]
@@ -191,5 +175,8 @@ namespace GrupoWebBackend.Tests
             Assert.AreEqual(expectedStatusCode, actualStatusCode);
             Assert.AreEqual(expectedMessage, actualMessage);
         }
+        
+        
+        
     }
 }

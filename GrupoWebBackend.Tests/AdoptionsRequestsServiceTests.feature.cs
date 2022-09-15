@@ -116,7 +116,6 @@ namespace GrupoWebBackend.Tests
                         "Email",
                         "Name",
                         "LastName",
-                        "DistrictId",
                         "Pass"});
             table5.AddRow(new string[] {
                         "2",
@@ -128,7 +127,6 @@ namespace GrupoWebBackend.Tests
                         "Hector@outlook.com",
                         "Hector",
                         "Voularte",
-                        "1",
                         "123456"});
 #line 10
   testRunner.And("A Second User is already stored for AdoptionsRequests", ((string)(null)), table5, "And ");

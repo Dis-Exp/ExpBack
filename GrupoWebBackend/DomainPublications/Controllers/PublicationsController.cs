@@ -39,17 +39,16 @@ namespace GrupoWebBackend.DomainPublications.Controllers
         public async Task<IActionResult> PostAsync([FromBody] SavePublicationResource resource)
         {
             if (!ModelState.IsValid)
-            
                 return BadRequest(ModelState.GetErrorMessages());
           
             var publication = _mapper.Map<SavePublicationResource, Publication>(resource);
             var result = await _publicationService.SaveAsync(publication);
 
-            if (!result.Success)
+            if (!result.Succces)
                 return BadRequest(result.Message);
 
 
-            var publicationResource = _mapper.Map<Publication, PublicationResource>(result.Resource);
+            var publicationResource = _mapper.Map<Publication, PublicationResource>(result.PublicationResponse);
             return Ok(publicationResource);
         }
         
