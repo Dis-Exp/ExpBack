@@ -13,6 +13,7 @@ namespace GrupoWebBackend.DomainPublications.Domain.Repositories
         void Update(Publication publication);
         void Remove(Publication publication);
         Task<IEnumerable<Publication>> FindByUserId(int userId);
+        Task<Publication> FindByPetId(int petId);
         
 
 

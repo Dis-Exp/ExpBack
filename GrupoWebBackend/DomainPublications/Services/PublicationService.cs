@@ -37,9 +37,13 @@ namespace GrupoWebBackend.DomainPublications.Services
         public async Task<SavePublicationResponse> SaveAsync(Publication publication)
         { 
            
-            var existingUserPublication = _publicationRepository.FindByUserId(publication.UserId);
+            var existingUserPublication = await _publicationRepository.FindByUserId(publication.UserId);
             if (existingUserPublication == null)
-                return new SavePublicationResponse("invalid user");
+                return new SavePublicationResponse(false,"This pet is already published.", publication);
+            
+            var existingPetPublication = await _publicationRepository.FindByPetId(publication.PetId);
+            if (existingPetPublication != null)
+                return new SavePublicationResponse(false,"This pet is already published.", publication);
             
             var existingUser = await _userRepository.FindByIdAsync(publication.UserId);
           

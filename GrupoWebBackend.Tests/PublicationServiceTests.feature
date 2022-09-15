@@ -21,27 +21,35 @@ So that it is available when wanting to see my publications.
         | 2      | Acoso | Testing     | 14/09/2022 11:35 |
         And a Subscription is already stored for Publication
         | UserId | NumPosts | Expired | StartDate  | EndDate   |
-        | 3      | 5    | 0 | 14-09-2022    | 25-09-2022   |
+        | 1      | 5    | 0 | 14-09-2022    | 25-09-2022   |
         And a Pet is already stored for Publication
         | Id  | Type | Name | Attention | Race    | Age   | isAdopted | UserId | PublicationId |
         | 101 | Cat  | Lolo |Required   | Catitus | 	2 | false     | 1      | 1             |
-  #NOTA-SOLO FUNCIONA SI LA BASE DE DATOS TIENE LOS MISMOS DATOS DEL USER ID Y PET ID 
+        And a Pet is already stored for Publication
+        | Id  | Type | Name | Attention | Race    | Age | isAdopted | UserId | PublicationId |
+        | 102 | Dog  | Lolo |Required   | Catitus | 	2 | false     | 1      | 1             |
+ 
     @publication-adding
     Scenario: Post a publication 
         When A publication is sent
         | PetId | UserId | DateTime         | Comment                |
-        | 101   | 3      | 29/09/2021 16:20 | This is a test comment |    
+        | 101   | 1      | 29/09/2021 16:20 | This is a test comment |    
+        Then a response with status 200 is received
+    Scenario: Post a publication of the same pet
+        When A publication is sent
+          | PetId | UserId | DateTime         | Comment                |
+          | 101   | 1      | 29/09/2021 16:20 | This is a test comment |    
+        Then a response with status 400 is received
+    Scenario: Post a publication from reported user
+        When A publication is sent
+        | PetId | UserId | DateTime         | Comment                |
+        | 102   | 2      | 29/09/2021 16:20 | This is a test comment | 
         Then a response with Message "This user has at least one report." and status 400 is received
-#    Scenario: Post a publication from reported user
-#        When A publication is sent
-#        | PetId | UserId | DateTime         | Comment                |
-#        | 101   | 2      | 29/09/2021 16:20 | This is a test comment | 
-#        Then a response with Message "This user has at least one report." and status 400 is received
-#    Scenario: Post a publication from not subscribed user
-#        When A publication is sent
-#        | PetId | UserId | DateTime         | Comment                |
-#        | 101   | 1      | 29/09/2021 16:20 | This is a test comment | 
-#        Then a response with Message "This user not have a subscription." and status 400 is received
+    Scenario: Post a publication from not subscribed user
+        When A publication is sent
+        | PetId | UserId | DateTime         | Comment                |
+        | 102   | 3      | 29/09/2021 16:20 | This is a test comment | 
+        Then a response with Message "This user not have a subscription." and status 400 is received
       
 #    Scenario: Post a publication with incorrect json body
 #        When A publication is sent

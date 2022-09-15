@@ -50,5 +50,11 @@ namespace GrupoWebBackend.DomainPublications.Persistence.Repositories
                 .Include(p => p.User)
                 .ToListAsync();
         }
+        
+        public async Task<Publication> FindByPetId(int petId)
+        {
+            return await _context.Publications.Where(p => p.PetId == petId)
+                .FirstOrDefaultAsync();
+        }
     }
 }

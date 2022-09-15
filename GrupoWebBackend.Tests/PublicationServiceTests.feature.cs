@@ -201,7 +201,7 @@ namespace GrupoWebBackend.Tests
                         "StartDate",
                         "EndDate"});
             table22.AddRow(new string[] {
-                        "3",
+                        "1",
                         "5",
                         "0",
                         "14-09-2022",
@@ -232,6 +232,29 @@ namespace GrupoWebBackend.Tests
 #line 25
         testRunner.And("a Pet is already stored for Publication", ((string)(null)), table23, "And ");
 #line hidden
+            TechTalk.SpecFlow.Table table24 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "Type",
+                        "Name",
+                        "Attention",
+                        "Race",
+                        "Age",
+                        "isAdopted",
+                        "UserId",
+                        "PublicationId"});
+            table24.AddRow(new string[] {
+                        "102",
+                        "Dog",
+                        "Lolo",
+                        "Required",
+                        "Catitus",
+                        "2",
+                        "false",
+                        "1",
+                        "1"});
+#line 28
+        testRunner.And("a Pet is already stored for Publication", ((string)(null)), table24, "And ");
+#line hidden
         }
         
         [NUnit.Framework.TestAttribute()]
@@ -243,7 +266,7 @@ namespace GrupoWebBackend.Tests
                     "publication-adding"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Post a publication", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 30
+#line 33
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -256,21 +279,142 @@ namespace GrupoWebBackend.Tests
 #line 5
     this.FeatureBackground();
 #line hidden
-                TechTalk.SpecFlow.Table table24 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table25 = new TechTalk.SpecFlow.Table(new string[] {
                             "PetId",
                             "UserId",
                             "DateTime",
                             "Comment"});
-                table24.AddRow(new string[] {
+                table25.AddRow(new string[] {
                             "101",
+                            "1",
+                            "29/09/2021 16:20",
+                            "This is a test comment"});
+#line 34
+        testRunner.When("A publication is sent", ((string)(null)), table25, "When ");
+#line hidden
+#line 37
+        testRunner.Then("a response with status 200 is received", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Post a publication of the same pet")]
+        public void PostAPublicationOfTheSamePet()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Post a publication of the same pet", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 38
+    this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 5
+    this.FeatureBackground();
+#line hidden
+                TechTalk.SpecFlow.Table table26 = new TechTalk.SpecFlow.Table(new string[] {
+                            "PetId",
+                            "UserId",
+                            "DateTime",
+                            "Comment"});
+                table26.AddRow(new string[] {
+                            "101",
+                            "1",
+                            "29/09/2021 16:20",
+                            "This is a test comment"});
+#line 39
+        testRunner.When("A publication is sent", ((string)(null)), table26, "When ");
+#line hidden
+#line 42
+        testRunner.Then("a response with status 400 is received", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Post a publication from reported user")]
+        public void PostAPublicationFromReportedUser()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Post a publication from reported user", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 43
+    this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 5
+    this.FeatureBackground();
+#line hidden
+                TechTalk.SpecFlow.Table table27 = new TechTalk.SpecFlow.Table(new string[] {
+                            "PetId",
+                            "UserId",
+                            "DateTime",
+                            "Comment"});
+                table27.AddRow(new string[] {
+                            "102",
+                            "2",
+                            "29/09/2021 16:20",
+                            "This is a test comment"});
+#line 44
+        testRunner.When("A publication is sent", ((string)(null)), table27, "When ");
+#line hidden
+#line 47
+        testRunner.Then("a response with Message \"This user has at least one report.\" and status 400 is re" +
+                        "ceived", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Post a publication from not subscribed user")]
+        public void PostAPublicationFromNotSubscribedUser()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Post a publication from not subscribed user", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 48
+    this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 5
+    this.FeatureBackground();
+#line hidden
+                TechTalk.SpecFlow.Table table28 = new TechTalk.SpecFlow.Table(new string[] {
+                            "PetId",
+                            "UserId",
+                            "DateTime",
+                            "Comment"});
+                table28.AddRow(new string[] {
+                            "102",
                             "3",
                             "29/09/2021 16:20",
                             "This is a test comment"});
-#line 31
-        testRunner.When("A publication is sent", ((string)(null)), table24, "When ");
+#line 49
+        testRunner.When("A publication is sent", ((string)(null)), table28, "When ");
 #line hidden
-#line 34
-        testRunner.Then("a response with Message \"This user has at least one report.\" and status 400 is re" +
+#line 52
+        testRunner.Then("a response with Message \"This user not have a subscription.\" and status 400 is re" +
                         "ceived", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
