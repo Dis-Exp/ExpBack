@@ -42,14 +42,14 @@ namespace GrupoWebBackend.DomainSubscriptions.Controllers
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] SaveSubscriptionResource resource)
         {
-            // if (!ModelState.IsValid)
-            //     return BadRequest(ModelState.GetErrorMessages());
-            //
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.GetErrorMessages());
+            
             var subscription = _mapper.Map<SaveSubscriptionResource, Subscription>(resource);
             var result = await _subscriptionService.AddAsync(subscription);
             
-            // if (!result.Succces)
-            //     return BadRequest(result.Message);
+            if (!result.Succces)
+                return BadRequest(result.Message);
             
             var subscriptionResource = _mapper.Map<Subscription, SubscriptionResource>(result.Subscription);
             return Ok(subscriptionResource);

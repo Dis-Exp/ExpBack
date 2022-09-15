@@ -41,6 +41,8 @@ using GrupoWebBackend.DomainReport;
 using Microsoft.AspNetCore.HttpOverrides;
 using GrupoWebBackend.DomainSubscriptions.Domain.Repositories;
 using GrupoWebBackend.DomainSubscriptions.Persistence.Repositories;
+using GrupoWebBackend.DomainSubscriptions.Domain.Services;
+using GrupoWebBackend.DomainSubscriptions.Services;
 
 namespace GrupoWebBackend
 {
@@ -68,8 +70,8 @@ namespace GrupoWebBackend
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
             services.AddDbContext<AppDbContext>(options =>
             {
-                //options.UseInMemoryDatabase("GrupoWebBackend-api-in-memory");
                 options.UseMySQL("server=localhost; user=timexp; database=timexp; password=XempreDB; port=3306");
+                //options.UseInMemoryDatabase("GrupoWebBackend-api-in-memory");
             });
             services.AddSwaggerGen(c =>
             {
@@ -98,6 +100,7 @@ namespace GrupoWebBackend
             services.AddScoped<IReportService, ReportService>();
             services.AddScoped<IReportRepository, ReportRepository>();
             services.AddScoped<ISubscriptionRepository, SubscriptionRepository>();
+            services.AddScoped<ISubscriptionService, SubscriptionService>();
 
             // AutoMapper Configuration
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

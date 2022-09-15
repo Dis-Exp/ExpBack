@@ -7,6 +7,7 @@ using GrupoWebBackend.DomainSubscriptions.Domain.Services;
 using GrupoWebBackend.DomainSubscriptions.Domain.Services.Communications;
 using GrupoWebBackend.DomainPublications.Domain.Repositories;
 using GrupoWebBackend.Shared.Domain.Repositories;
+using GrupoWebBackend.Security.Domain.Repositories;
 
 namespace GrupoWebBackend.DomainSubscriptions.Services
 {
@@ -14,12 +15,13 @@ namespace GrupoWebBackend.DomainSubscriptions.Services
     {
         private readonly ISubscriptionRepository _subscriptionRepository;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IPublicationRepository _publicationRepository;
+        private readonly IUserRepository _userRepository;
 
-        public SubscriptionService(ISubscriptionRepository subscriptionRepository, IPublicationRepository publicationRepository, IUnitOfWork unitOfWork)
+        public SubscriptionService(ISubscriptionRepository subscriptionRepository, IUserRepository userRepository, IUnitOfWork unitOfWork)
         {
             _subscriptionRepository = subscriptionRepository;
             _unitOfWork = unitOfWork;
+            _userRepository = userRepository;
         }
 
         public async Task<IEnumerable<Subscription>> ListAsync()
@@ -36,7 +38,7 @@ namespace GrupoWebBackend.DomainSubscriptions.Services
         
         public async Task<SaveSubscriptionResponse> AddAsync(Subscription subscription)
         {
-            var existingUser = _publicationRepository.FindByUserId(subscription.UserId);
+            var existingUser = _userRepository.FindById(subscription.UserId);
             if (existingUser == null)
                 return new SaveSubscriptionResponse("Invalid user");
             

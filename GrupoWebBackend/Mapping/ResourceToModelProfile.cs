@@ -14,6 +14,8 @@ using GrupoWebBackend.Security.Domain.Services.Communication;
 using GrupoWebBackend.Security.Resources;
 using GrupoWebBackend.DomainReport;
 using GrupoWebBackend.DomainReport.Models;
+using GrupoWebBackend.DomainSubscriptions.Resources;
+using GrupoWebBackend.DomainSubscriptions.Domain.Models;
 
 namespace GrupoWebBackend.Mapping
 {
@@ -31,6 +33,7 @@ namespace GrupoWebBackend.Mapping
             CreateMap<AuthenticateRequest, User>();
             CreateMap<UserResource, User>();
             CreateMap<ReportResource, Report>();
+            CreateMap<SaveSubscriptionResource, Subscription>();
         }
     }
 }
