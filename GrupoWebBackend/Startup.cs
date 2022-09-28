@@ -70,8 +70,8 @@ namespace GrupoWebBackend
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
             services.AddDbContext<AppDbContext>(options =>
             {
-                //options.UseInMemoryDatabase("server=localhost; user=timexp; database=timexp; password=XempreDB; port=3306");
-                options.UseInMemoryDatabase("GrupoWebBackend-api-in-memory");
+                options.UseMySQL("server=localhost; user=timexp; database=timexp; password=XempreDB; port=3306");
+                //options.UseInMemoryDatabase("GrupoWebBackend-api-in-memory"); // SI USAN ESTA LÍNEA, NO OLVIDEN REGRESAR AL USO DE MYSQL AL HACER COMMIT
             });
             services.AddSwaggerGen(c =>
             {
@@ -116,8 +116,17 @@ namespace GrupoWebBackend
 
             // For this course purpose we allow Swagger in release mode.
             app.UseDeveloperExceptionPage();
-            app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TimExp Backend v1"));
+            app.UseSwagger(c =>
+            {
+                c.RouteTemplate = "docs/swagger/{documentname}/swagger.json";
+            });
+
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/docs/swagger/v1/swagger.json", "AdoptMe API v1 Documentation");
+                c.RoutePrefix = "docs/swagger";
+            });
 
             app.UseCors(builder => builder
                 .AllowAnyOrigin()
