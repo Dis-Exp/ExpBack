@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using GrupoWebBackend.DomainPublications.Domain.Models;
 using GrupoWebBackend.DomainPublications.Domain.Services.Communications;
-using GrupoWebBackend.DomainPublications.Resources;
 
 namespace GrupoWebBackend.DomainPublications.Domain.Services
 {
@@ -14,6 +13,7 @@ namespace GrupoWebBackend.DomainPublications.Domain.Services
         Task<Publication> FindByIdAsync(int id);
         Task<PublicationResponse> UpdateAsync(int id, Publication publication);
         Task<PublicationResponse> DeleteAsync(int id);
-
+        Task<IEnumerable<object>> ListPublicationsInfoPetsAsync();
+        Task<IEnumerable<object>> ListPublicationsInfoPetsAsyncByUserId(int id);
     }
 }

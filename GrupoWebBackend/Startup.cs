@@ -70,7 +70,7 @@ namespace GrupoWebBackend
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
             services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseMySQL("server=localhost; user=timexp; database=timexp; password=XempreDB; port=3306");
+                options.UseMySQL("server=localhost; user=root; database=timexp; password=mysql; port=3306");
                 //options.UseInMemoryDatabase("GrupoWebBackend-api-in-memory"); // SI USAN ESTA LÍNEA, NO OLVIDEN REGRESAR AL USO DE MYSQL AL HACER COMMIT
             });
             services.AddSwaggerGen(c =>
@@ -114,19 +114,26 @@ namespace GrupoWebBackend
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
             });
 
-            // For this course purpose we allow Swagger in release mode.
-            app.UseDeveloperExceptionPage();
-            app.UseSwagger(c =>
+            if (env.IsDevelopment())
             {
-                c.RouteTemplate = "docs/swagger/{documentname}/swagger.json";
-            });
-
-
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/docs/swagger/v1/swagger.json", "AdoptMe API v1 Documentation");
-                c.RoutePrefix = "docs/swagger";
-            });
+                app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "GrupoWebBackend v1"));
+            }
+            
+            // // For this course purpose we allow Swagger in release mode.
+            // app.UseDeveloperExceptionPage();
+            // app.UseSwagger(c =>
+            // {
+            //     c.RouteTemplate = "docs/swagger/{documentname}/swagger.json";
+            // });
+            //
+            //
+            // app.UseSwaggerUI(c =>
+            // {
+            //     c.SwaggerEndpoint("/docs/swagger/v1/swagger.json", "AdoptMe API v1 Documentation");
+            //     c.RoutePrefix = "docs/swagger";
+            // });
 
             app.UseCors(builder => builder
                 .AllowAnyOrigin()

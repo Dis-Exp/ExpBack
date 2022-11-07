@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using GrupoWebBackend.DomainPublications.Domain.Models;
-using GrupoWebBackend.DomainPublications.Resources;
 
 namespace GrupoWebBackend.DomainPublications.Domain.Repositories
 {
@@ -14,9 +13,7 @@ namespace GrupoWebBackend.DomainPublications.Domain.Repositories
         void Remove(Publication publication);
         Task<IEnumerable<Publication>> FindByUserId(int userId);
         Task<Publication> FindByPetId(int petId);
-        
-
-
-
+        Task<IEnumerable<object>> ListPublicationsInfoPetsAsync();
+        Task<IEnumerable<object>> ListPublicationsInfoPetsAsyncByUserId(int id);
     }
 }

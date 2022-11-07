@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using GrupoWebBackend.DomainPets.Domain.Repositories;
 using GrupoWebBackend.DomainPublications.Domain.Models;
 using GrupoWebBackend.DomainPublications.Domain.Repositories;
 using GrupoWebBackend.DomainPublications.Domain.Services;
 using GrupoWebBackend.DomainPublications.Domain.Services.Communications;
-using GrupoWebBackend.DomainPublications.Resources;
 using GrupoWebBackend.Security.Domain.Repositories;
 using GrupoWebBackend.Shared.Domain.Repositories;
 
@@ -115,6 +113,15 @@ namespace GrupoWebBackend.DomainPublications.Services
                 return new PublicationResponse($"An error occurred while deleting the publication: {e.Message}");
             }
         }
-        
+
+        public async Task<IEnumerable<object>> ListPublicationsInfoPetsAsync()
+        {
+            return await _publicationRepository.ListPublicationsInfoPetsAsync();
+        }
+
+        public async Task<IEnumerable<object>> ListPublicationsInfoPetsAsyncByUserId(int id)
+        {
+            return await _publicationRepository.ListPublicationsInfoPetsAsyncByUserId(id);
+        }
     }
 }

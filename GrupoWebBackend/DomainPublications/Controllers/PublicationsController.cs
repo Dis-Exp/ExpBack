@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
-using GrupoWebBackend.DomainAdvertisements.Domain.Models;
 using GrupoWebBackend.DomainPublications.Domain.Models;
 using GrupoWebBackend.DomainPublications.Domain.Services;
 using GrupoWebBackend.Extensions;
@@ -32,7 +31,21 @@ namespace GrupoWebBackend.DomainPublications.Controllers
             return resources;
         }
         
- 
+        [HttpGet("petsInfo")]
+        [SwaggerOperation(Summary="Get All publications with Pet Info",Tags= new [] {"Publication with Pet Info"})]
+        public async Task<IEnumerable<object>> ListPublicationsInfoPetsAsync()
+        {
+            var publications = await _publicationService.ListPublicationsInfoPetsAsync();
+            return publications;
+        }
+        
+        [HttpGet("petsInfo/{id:int}")]
+        [SwaggerOperation(Summary="Get All publications with Pet Info By User Id",Tags= new [] {"Publication with Pet Info By User Id"})]
+        public async Task<IEnumerable<object>> ListPublicationsInfoPetsAsyncByUserId(int id)
+        {
+            var publications = await _publicationService.ListPublicationsInfoPetsAsyncByUserId(id);
+            return publications;
+        }
         
         [HttpPost]
         [SwaggerOperation(Summary="Post a publication",Tags= new [] {"Publications"})]

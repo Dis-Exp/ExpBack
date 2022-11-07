@@ -3,11 +3,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using GrupoWebBackend.DomainPublications.Domain.Models;
 using GrupoWebBackend.DomainPublications.Domain.Repositories;
-using GrupoWebBackend.DomainPublications.Resources;
 using GrupoWebBackend.Shared.Persistence.Context;
 using GrupoWebBackend.Shared.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace GrupoWebBackend.DomainPublications.Persistence.Repositories
 {
@@ -56,5 +54,40 @@ namespace GrupoWebBackend.DomainPublications.Persistence.Repositories
             return await _context.Publications.Where(p => p.PetId == petId)
                 .FirstOrDefaultAsync();
         }
+
+        public async Task<IEnumerable<object>> ListPublicationsInfoPetsAsync()
+        {
+            var query = from pu in _context.Publications
+                join pe in _context.Pets on pu.PetId equals pe.Id
+                select new
+                {
+                    userId = pu.UserId,
+                    publicationId = pu.Id,
+                    petId = pe.Id,
+                    type = pe.Type,
+                    image = pe.UrlToImage,
+                    name = pe.Name,
+                    comment = pu.Comment,
+                };
+            return await query.ToListAsync();
+        }
+
+        public async Task<IEnumerable<object>> ListPublicationsInfoPetsAsyncByUserId(int id)
+        {
+            var query = from pu in _context.Publications
+                join pe in _context.Pets on pu.PetId equals pe.Id
+                select new
+                {
+                    userId = pu.UserId,
+                    publicationId = pu.Id,
+                    petId = pe.Id,
+                    type = pe.Type,
+                    image = pe.UrlToImage,
+                    name = pe.Name,
+                    comment = pu.Comment,
+                };
+            return await query.Where(p => p.userId == id).ToListAsync();
+        }
+
     }
 }
