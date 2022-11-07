@@ -114,26 +114,26 @@ namespace GrupoWebBackend
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
             });
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "GrupoWebBackend v1"));
-            }
+            // if (env.IsDevelopment())
+            // {
+            //     app.UseDeveloperExceptionPage();
+            //     app.UseSwagger();
+            //     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "GrupoWebBackend v1"));
+            // }
             
-            // // For this course purpose we allow Swagger in release mode.
-            // app.UseDeveloperExceptionPage();
-            // app.UseSwagger(c =>
-            // {
-            //     c.RouteTemplate = "docs/swagger/{documentname}/swagger.json";
-            // });
-            //
-            //
-            // app.UseSwaggerUI(c =>
-            // {
-            //     c.SwaggerEndpoint("/docs/swagger/v1/swagger.json", "AdoptMe API v1 Documentation");
-            //     c.RoutePrefix = "docs/swagger";
-            // });
+            // For this course purpose we allow Swagger in release mode.
+            app.UseDeveloperExceptionPage();
+            app.UseSwagger(c =>
+            {
+                c.RouteTemplate = "docs/swagger/{documentname}/swagger.json";
+            });
+            
+            
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/docs/swagger/v1/swagger.json", "AdoptMe API v1 Documentation");
+                c.RoutePrefix = "docs/swagger";
+            });
 
             app.UseCors(builder => builder
                 .AllowAnyOrigin()
