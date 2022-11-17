@@ -63,6 +63,7 @@ namespace GrupoWebBackend.DomainPets.Services
             existingPet.Name = pet.Name;
             existingPet.Race = pet.Race;
             existingPet.Type = pet.Type;
+            existingPet.Gender = pet.Gender;
             existingPet.IsAdopted = pet.IsAdopted;
             existingPet.IsPublished = pet.IsPublished;
             existingPet.UserId = pet.UserId;
