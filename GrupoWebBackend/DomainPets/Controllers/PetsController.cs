@@ -92,14 +92,14 @@ namespace GrupoWebBackend.DomainPets.Controllers
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] SavePetResource resource)
         {
-            // if (!ModelState.IsValid)
-            //     return BadRequest(ModelState.GetErrorMessages());
-            //
+            if (!ModelState.IsValid)
+                 return BadRequest(ModelState.GetErrorMessages());
+            
             var pet = _mapper.Map<SavePetResource, Pet>(resource);
             var result = await _petService.AddAsync(pet);
             
-            // if (!result.Succces)
-            //     return BadRequest(result.Message);
+            if (!result.Succces)
+                 return BadRequest(result.Message);
             
             var petResource = _mapper.Map<Pet, PetResource>(result.Pet);
             return Ok(petResource);
