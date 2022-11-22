@@ -13,7 +13,8 @@ namespace GrupoWebBackend.DomainAdvertisements.Domain.Models
         public bool Promoted { get; set; }
         public User User { get; set; }
         public int UserId { get; set; } 
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
         
-      
     }
 }

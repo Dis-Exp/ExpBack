@@ -18,5 +18,7 @@ namespace GrupoWebBackend.DomainAdvertisements.Resources
         public bool Promoted { get; set; }
         [Required]
         public int UserId { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
     }
 }
