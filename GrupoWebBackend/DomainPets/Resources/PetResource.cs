@@ -10,7 +10,7 @@
         public string Race { get; set; }
         public bool IsAdopted { get; set; }
         public int UserId { get; set; }
-        public int PublicationId { get; set; }
+        //public int PublicationId { get; set; }
         public bool IsPublished { get; set; }
         public string Gender { get; set; }
         public string UrlToImage { get; set; }

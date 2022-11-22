@@ -9,6 +9,7 @@ using GrupoWebBackend.Security.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using GrupoWebBackend.DomainReport;
 using GrupoWebBackend.DomainSubscriptions.Domain.Models;
+using System;
 
 namespace GrupoWebBackend.Shared.Persistence.Context
 {
@@ -76,10 +77,11 @@ namespace GrupoWebBackend.Shared.Persistence.Context
             builder.Entity<Pet>().Property(p => p.UserId).IsRequired();
             builder.Entity<Pet>().Property(p => p.Race).IsRequired();
             builder.Entity<Pet>().Property(p => p.IsAdopted).IsRequired();
-            builder.Entity<Pet>().Property(p => p.PublicationId).IsRequired(false);
             builder.Entity<Pet>().Property(p => p.IsPublished).IsRequired();
             builder.Entity<Pet>().Property(p => p.Gender).IsRequired(false);
             builder.Entity<Pet>().Property(p => p.UrlToImage).IsRequired(false);
+            //builder.Entity<Pet>().Property(p => p.PublicationId).IsRequired();
+
             //Advertisement Constraints
             builder.Entity<Advertisement>().ToTable("Advertisements");
             builder.Entity<Advertisement>().HasKey(p => p.Id);
@@ -91,6 +93,7 @@ namespace GrupoWebBackend.Shared.Persistence.Context
             builder.Entity<Advertisement>().Property(p => p.Discount);
             builder.Entity<Advertisement>().Property(p => p.Title).HasMaxLength(70).IsRequired();
             builder.Entity<Advertisement>().Property(p => p.UserId).IsRequired();
+
             //Publications Constraints
             builder.Entity<Publication>().ToTable("Publications");
             builder.Entity<Publication>().HasKey(p => p.Id);
@@ -99,17 +102,20 @@ namespace GrupoWebBackend.Shared.Persistence.Context
             builder.Entity<Publication>().Property(p => p.UserId).IsRequired();
             builder.Entity<Publication>().Property(p => p.PetId).IsRequired();
             builder.Entity<Publication>().Property(p => p.Comment).HasMaxLength(70).IsRequired();
+            builder.Entity<Publication>().Property(p => p.IsEnabled).HasDefaultValue(true).IsRequired();
+
             //AdoptionsRequests
             builder.Entity<AdoptionsRequests>().ToTable("AdoptionsRequests");
             builder.Entity<AdoptionsRequests>().HasKey(p => p.Id);
             builder.Entity<AdoptionsRequests>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<AdoptionsRequests>().Property(p => p.Message).IsRequired();
-          //  builder.Entity<AdoptionsRequests>().Property(p => p.Message).HasMaxLength(300).IsRequired();
-            builder.Entity<AdoptionsRequests>().Property(p => p.Status).IsRequired();
-            //builder.Entity<AdoptionsRequests>().Property(p => p.Status).HasMaxLength(30).IsRequired();
+            builder.Entity<AdoptionsRequests>().Property(p => p.Status).HasConversion<string>(
+                v => v.ToString(),
+                v => (AdoptionRequestStatus)Enum.Parse(typeof(AdoptionRequestStatus), v)).IsRequired();
             builder.Entity<AdoptionsRequests>().Property(p =>p.UserIdFrom).IsRequired();
             builder.Entity<AdoptionsRequests>().Property(p => p.UserIdAt).IsRequired();
             builder.Entity<AdoptionsRequests>().Property(p =>p.PublicationId).IsRequired();
+           
             // Districts
             builder.Entity<District>().ToTable("Districts");
             builder.Entity<District>().HasKey(p => p.Id);
@@ -158,9 +164,7 @@ namespace GrupoWebBackend.Shared.Persistence.Context
                 .HasForeignKey(p => p.UserId);
 
             //Publication Relations
-            builder.Entity<Publication>().HasMany(p => p.Pets)
-                .WithOne(p => p.Publication)
-                .HasForeignKey(p => p.PublicationId);
+            builder.Entity<Publication>().HasOne(p => p.Pet);
 
             //AdoptionsRequests Relations 
             builder.Entity<Publication>().HasMany(p => p.AdoptionsRequestsList)
@@ -248,59 +252,48 @@ namespace GrupoWebBackend.Shared.Persistence.Context
                     //PetId = 100
                 }
             );
-            
-            
+
+            var pet1 = new Pet
+            {
+                Id = 100,
+                Type = "Dog",
+                Name = "Tito",
+                Attention = "Required",
+                Race = "Caninus",
+                Age = 2,
+                IsAdopted = true,
+                UserId = 3
+            };
+
+            var pet2 = new Pet
+            {
+                Id = 102,
+                Type = "Cat",
+                Name = "Lulu",
+                Attention = "No Required",
+                Race = "Catitus",
+                Age = 2,
+                IsAdopted = false,
+                UserId = 3
+            };
+
+            var pet3 = new Pet
+            {
+                Id = 103,
+                Type = "Cat",
+                Name = "Lulu",
+                Attention = "No Required",
+                Race = "Catitus",
+                Age = 3,
+                IsAdopted = false,
+                UserId = 3
+            };
+
+
             // Pet Sample Data
             builder.Entity<Pet>().HasData
             (
-                new Pet
-                {
-                    Id = 100,
-                    Type = "Dog",
-                    Name = "Tito",
-                    Attention = "Required",
-                    Race = "Caninus",
-                    Age = 2,
-                    IsAdopted = true,
-                    UserId = 4,
-                    PublicationId = 2
-                },
-                new Pet
-                {
-                    Id = 101,
-                    Type = "Cat",
-                    Name = "Lolo",
-                    Attention = "Required",
-                    Race = "Catitus",
-                    Age = 2,
-                    IsAdopted = false,
-                    UserId = 4,
-                    PublicationId = 1
-                },
-                new Pet
-                {
-                    Id = 102,
-                    Type = "Cat",
-                    Name = "Lulu",
-                    Attention = "No Required",
-                    Race = "Catitus",
-                    Age = 2,
-                    IsAdopted = false,
-                    UserId = 4,
-                    PublicationId = 1
-                },
-                new Pet
-                {
-                    Id = 103,
-                    Type = "Cat",
-                    Name = "Lulu",
-                    Attention = "No Required",
-                    Race = "Catitus",
-                    Age = 3,
-                    IsAdopted = false,
-                    UserId = 4,
-                    PublicationId = 1
-                }
+                pet1, pet2, pet3
             );
 
             //Advertisement Sample Data
@@ -318,36 +311,50 @@ namespace GrupoWebBackend.Shared.Persistence.Context
                     Promoted = true
                 }
             );
+
+            builder.Entity<Subscription>().HasData
+                (
+                new Subscription
+                {
+                    Id = 1,
+                    UserId = 3,
+                    StartDate = DateTime.Now,
+                    EndDate = DateTime.Now.AddYears(1)
+                }
+                );
             //User SampleData
 
             //Publications SampleData
-            builder.Entity<Publication>().HasData
-            (
-                new Publication()
-                {
-                    Id = 1,
-                    UserId = 1,
-                    DateTime = "29/09/2021 16:20",
-                    PetId = 101,
-                    Comment = "this is a comment"
-                },
-                new Publication()
-                {
-                    Id = 2,
-                    UserId = 1,
-                    DateTime = "29/09/2021 16:20",
-                    PetId = 100,
-                    Comment = "this is a comment"
-                },
-                new Publication()
-                {
-                    Id = 3,
-                    UserId = 1,
-                    DateTime = "29/09/2021 16:20",
-                    PetId = -1,
-                    Comment = "this is a comment"
-                }
-            );
+            //builder.Entity<Publication>().HasData
+            //(
+            //    new Publication()
+            //    {
+            //        Id = 1,
+            //        UserId = 1,
+            //        DateTime = "29/09/2021 16:20",
+            //        PetId = pet1.Id,
+            //        Comment = "this is a comment",
+            //        IsEnabled = true
+            //    },
+            //    new Publication()
+            //    {
+            //        Id = 2,
+            //        UserId = 1,
+            //        DateTime = "29/09/2021 16:20",
+            //        Pet = pet2,
+            //        Comment = "this is a comment",
+            //        IsEnabled = true
+            //    },
+            //    new Publication()
+            //    {
+            //        Id = 3,
+            //        UserId = 1,
+            //        DateTime = "29/09/2021 16:20",
+            //        Pet = pet3,
+            //        Comment = "this is a comment",
+            //        IsEnabled = false
+            //    }
+            //);
 
             //AdoptionsRequests SampleData
 

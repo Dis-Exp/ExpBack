@@ -71,7 +71,7 @@ namespace GrupoWebBackend
             services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseMySQL("server=localhost; user=timexp; database=timexp; password=XempreDB; port=3306");
-                //options.UseInMemoryDatabase("GrupoWebBackend-api-in-memory"); // SI USAN ESTA L�NEA, NO OLVIDEN REGRESAR AL USO DE MYSQL AL HACER COMMIT
+                //options.UseInMemoryDatabase("GrupoWebBackend-api-in-memory"); // SI USAN ESTA LÍNEA, NO OLVIDEN REGRESAR AL USO DE MYSQL AL HACER COMMIT
             });
             services.AddSwaggerGen(c =>
             {

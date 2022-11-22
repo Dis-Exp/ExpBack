@@ -17,8 +17,6 @@ namespace GrupoWebBackend.DomainPublications.Persistence.Repositories
 
         public async Task<IEnumerable<Publication>> ListPublicationsAsync()
         {
-            //USING framework net
-            
             return await _context.Publications.ToListAsync();
         }
 
@@ -44,32 +42,33 @@ namespace GrupoWebBackend.DomainPublications.Persistence.Repositories
 
         public async Task<IEnumerable<Publication>> FindByUserId(int userId)
         {
-            return await _context.Publications.Where(p => p.UserId == userId)
+            return await _context.Publications.Where(p => p.UserId == userId && p.IsEnabled == true)
                 .Include(p => p.User)
                 .ToListAsync();
         }
         
         public async Task<Publication> FindByPetId(int petId)
         {
-            return await _context.Publications.Where(p => p.PetId == petId)
+            return await _context.Publications.Where(p => p.PetId == petId && p.IsEnabled == true)
                 .FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<object>> ListPublicationsInfoPetsAsync()
         {
             var query = from pu in _context.Publications
-                join pe in _context.Pets on pu.PetId equals pe.Id
-                select new
-                {
-                    userId = pu.UserId,
-                    publicationId = pu.Id,
-                    petId = pe.Id,
-                    type = pe.Type,
-                    image = pe.UrlToImage,
-                    name = pe.Name,
-                    comment = pu.Comment,
-                };
-            return await query.ToListAsync();
+                        join pe in _context.Pets on pu.PetId equals pe.Id
+                        select new
+                        {
+                            isEnabled = pu.IsEnabled,
+                            userId = pu.UserId,
+                            publicationId = pu.Id,
+                            petId = pe.Id,
+                            type = pe.Type,
+                            image = pe.UrlToImage,
+                            name = pe.Name,
+                            comment = pu.Comment,
+                        };
+            return await query.Where(p => p.isEnabled == true).ToListAsync();
         }
 
         public async Task<IEnumerable<object>> ListPublicationsInfoPetsAsyncByUserId(int id)
@@ -78,6 +77,7 @@ namespace GrupoWebBackend.DomainPublications.Persistence.Repositories
                 join pe in _context.Pets on pu.PetId equals pe.Id
                 select new
                 {
+                    isEnabled = pu.IsEnabled,
                     userId = pu.UserId,
                     publicationId = pu.Id,
                     petId = pe.Id,
@@ -86,7 +86,7 @@ namespace GrupoWebBackend.DomainPublications.Persistence.Repositories
                     name = pe.Name,
                     comment = pu.Comment,
                 };
-            return await query.Where(p => p.userId == id).ToListAsync();
+            return await query.Where(p => p.userId == id && p.isEnabled == true).ToListAsync();
         }
 
     }

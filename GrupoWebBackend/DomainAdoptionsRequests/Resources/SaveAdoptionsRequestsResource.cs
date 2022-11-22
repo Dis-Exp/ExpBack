@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using GrupoWebBackend.DomainPublications.Domain.Models;
-using GrupoWebBackend.Security.Domain.Entities;
-using System.Diagnostics.CodeAnalysis;
+using GrupoWebBackend.DomainAdoptionsRequests.Domain.Models;
+
 namespace GrupoWebBackend.DomainAdoptionsRequests.Resources
 {
     public class SaveAdoptionsRequestsResource
@@ -10,7 +9,7 @@ namespace GrupoWebBackend.DomainAdoptionsRequests.Resources
         public string Message { get; set; }
         
         [Required]
-        public string Status { get; set; }
+        public AdoptionRequestStatus Status { get; set; }
         
         [Required]
         public int UserIdFrom { get; set; }

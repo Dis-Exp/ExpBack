@@ -5,11 +5,17 @@ using GrupoWebBackend.Security.Domain.Entities;
 
 namespace GrupoWebBackend.DomainAdoptionsRequests.Domain.Models
 {
+    public enum AdoptionRequestStatus
+    {
+        Pending,
+        Accepted,
+        Rejected
+    }     
     public class AdoptionsRequests
     {
         public int Id { get; set; }
         public string Message { get; set; }
-        public string Status { get; set; }
+        public AdoptionRequestStatus Status { get; set; }
         public int UserIdFrom { get; set; }
         public int UserIdAt { get; set; }
         public User User { get; set; }
