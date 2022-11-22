@@ -15,7 +15,9 @@ namespace GrupoWebBackend.DomainPublications.Domain.Models
         public string Comment { get; set; }
 
         public IList<AdoptionsRequests> AdoptionsRequestsList { get; set; } = new List<AdoptionsRequests>();
-        public IList<Pet> Pets { get; set; } = new List<Pet>();
+        public Pet Pet { get; set; } = new Pet();
+
+        public bool IsEnabled { get; set; }
 
     }
 }
