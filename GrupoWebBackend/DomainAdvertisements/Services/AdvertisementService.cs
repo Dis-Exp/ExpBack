@@ -75,6 +75,8 @@ namespace GrupoWebBackend.DomainAdvertisements.Services
             existingAdvertisement.Title = advertisement.Title;
             existingAdvertisement.DateTime = advertisement.DateTime;
             existingAdvertisement.UrlToImage = advertisement.UrlToImage;
+            existingAdvertisement.Latitude = advertisement.Latitude;
+            existingAdvertisement.Longitude = advertisement.Longitude;
             try
             {
                 _advertisementRepository.Update(existingAdvertisement);

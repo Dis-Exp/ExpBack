@@ -93,6 +93,8 @@ namespace GrupoWebBackend.Shared.Persistence.Context
             builder.Entity<Advertisement>().Property(p => p.Discount);
             builder.Entity<Advertisement>().Property(p => p.Title).HasMaxLength(70).IsRequired();
             builder.Entity<Advertisement>().Property(p => p.UserId).IsRequired();
+            builder.Entity<Advertisement>().Property(p => p.Latitude);
+            builder.Entity<Advertisement>().Property(p => p.Longitude);
 
             //Publications Constraints
             builder.Entity<Publication>().ToTable("Publications");
@@ -169,7 +171,8 @@ namespace GrupoWebBackend.Shared.Persistence.Context
             //AdoptionsRequests Relations 
             builder.Entity<Publication>().HasMany(p => p.AdoptionsRequestsList)
                 .WithOne(p => p.Publication)
-                .HasForeignKey(p => p.PublicationId);
+                .HasForeignKey(p => p.PublicationId)
+                .OnDelete(DeleteBehavior.Cascade);
             
             //AdoptionsRequests Relations 
             builder.Entity<User>().HasMany(p => p.AdoptionsRequestsList)
