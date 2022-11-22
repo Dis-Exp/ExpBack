@@ -7,5 +7,6 @@
         public int UserId { get; set; }
         public string dateTime { get; set; }
         public string comment { get; set; }
+        public bool IsEnabled { get; set; }
     }
 }

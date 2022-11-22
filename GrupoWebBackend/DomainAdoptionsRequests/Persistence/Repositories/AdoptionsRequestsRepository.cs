@@ -28,7 +28,7 @@ namespace GrupoWebBackend.DomainAdoptionsRequests.Persistence.Repositories
 
         public async Task<AdoptionsRequests> FindByIdAsync(int id)
         {
-            return await _context.AdoptionsRequests.FindAsync(id);
+            return await _context.AdoptionsRequests.Include(ar => ar.Publication.Pet).FirstOrDefaultAsync(ar => ar.Id == id);
         }
         
         public async Task<IEnumerable<AdoptionsRequests>> FindByUserId(int id)

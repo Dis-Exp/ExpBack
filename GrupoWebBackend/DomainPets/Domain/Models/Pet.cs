@@ -20,8 +20,8 @@ namespace GrupoWebBackend.DomainPets.Domain.Models
         public string UrlToImage { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
-        [AllowNull]
-        public int? PublicationId { get; set; }
-        public Publication Publication { get; set; }
+        //[AllowNull]
+        //public int? PublicationId { get; set; }
+        //public Publication Publication { get; set; }
     }
 }

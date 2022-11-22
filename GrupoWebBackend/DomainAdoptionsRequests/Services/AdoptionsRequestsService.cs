@@ -16,6 +16,7 @@ using GrupoWebBackend.Security.Domain.Repositories;
 using GrupoWebBackend.Shared.Domain.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using GrupoWebBackend.DomainPets.Domain.Models;
 
 namespace GrupoWebBackend.DomainAdoptionsRequests.Services
 {
@@ -28,16 +29,19 @@ namespace GrupoWebBackend.DomainAdoptionsRequests.Services
         private readonly IPublicationRepository _publicationRepository;
         private readonly IUserRepository _userRepository;
         private readonly IReportRepository _reportRepository;
+        private readonly IPetRepository _petRepository;
 
         public AdoptionsRequestsService(IAdoptionsRequestsRepository adoptionsRequestsRepository,
             IPublicationRepository publicationRepository,
-            IUnitOfWork unitOfWork, IUserRepository userRepository, IReportRepository reportRepository)
+            IUnitOfWork unitOfWork, IUserRepository userRepository, IReportRepository reportRepository,
+            IPetRepository petRepository)
         {
             _requestsAdoptionsRepository = adoptionsRequestsRepository;
             _unitOfWork = unitOfWork;
             _publicationRepository = publicationRepository;
             _userRepository = userRepository;
             _reportRepository = reportRepository;
+            _petRepository = petRepository;
         }
 
         public async Task<IEnumerable<AdoptionsRequests>> ListAdoptionsRequestsAsync()
@@ -52,10 +56,10 @@ namespace GrupoWebBackend.DomainAdoptionsRequests.Services
 */
       public async Task<SaveAdoptionsRequestsResponse> AddAsync(AdoptionsRequests adoptionsRequest)
       {
-          /*var existingPublication =  await _publicationRepository.FindByIdAsync(adoptionsRequest.PublicationId);
+          var existingPublication =  await _publicationRepository.FindByIdAsync(adoptionsRequest.PublicationId);
           
           if (existingPublication == null)
-              return new SaveAdoptionsRequestsResponse(false, "Invalid Publication.", adoptionsRequest);*/
+              return new SaveAdoptionsRequestsResponse(false, "Invalid Publication.", adoptionsRequest);
           
           var existingAdoptionRequest =  await _requestsAdoptionsRepository.FindByIdAsync(adoptionsRequest.UserIdFrom);
           
@@ -89,15 +93,33 @@ namespace GrupoWebBackend.DomainAdoptionsRequests.Services
       public async Task<AdoptionsRequestsResponse> UpdateAsync(int id, AdoptionsRequests adoptionsRequest)
       {
           var existingAdoptionsRequests = await _requestsAdoptionsRepository.FindByIdAsync(id);
+
           if (existingAdoptionsRequests == null)
               return new AdoptionsRequestsResponse("Adoptions Requests not Found");
+
           existingAdoptionsRequests.Message = adoptionsRequest.Message;
           existingAdoptionsRequests.Status = adoptionsRequest.Status;
-          existingAdoptionsRequests.UserIdFrom = adoptionsRequest.UserIdFrom;
-          existingAdoptionsRequests.UserIdAt = adoptionsRequest.UserIdAt;
-          existingAdoptionsRequests.PublicationId = adoptionsRequest.PublicationId;
+          //existingAdoptionsRequests.UserIdFrom = adoptionsRequest.UserIdFrom;
+          //existingAdoptionsRequests.UserIdAt = adoptionsRequest.UserIdAt;
+          //existingAdoptionsRequests.PublicationId = adoptionsRequest.PublicationId;
 
-          try
+          if (adoptionsRequest.Status == AdoptionRequestStatus.Accepted)
+          {
+                //var publication = await _publicationRepository.FindByIdAsync(existingAdoptionsRequests.PublicationId);
+                //var pet = await _petRepository.FindAsync(publication.PetId);
+                var newOwner = await _userRepository.FindByIdAsync(existingAdoptionsRequests.UserIdFrom);
+                var pet = existingAdoptionsRequests.Publication.Pet;
+                    pet.IsAdopted = true;
+                    pet.IsPublished = false;
+                    pet.UserId = newOwner.Id;
+                    _petRepository.UpdateAsync(pet);
+
+                existingAdoptionsRequests.Publication.IsEnabled = false;
+
+                _publicationRepository.Update(existingAdoptionsRequests.Publication);
+          }
+
+                try
           {
               _requestsAdoptionsRepository.Update(existingAdoptionsRequests);
               await _unitOfWork.CompleteAsync();

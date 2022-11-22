@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using GrupoWebBackend.DomainPets.Domain.Repositories;
 using GrupoWebBackend.DomainPublications.Domain.Models;
 using GrupoWebBackend.DomainPublications.Domain.Repositories;
 using GrupoWebBackend.DomainPublications.Domain.Services;
@@ -16,12 +17,14 @@ namespace GrupoWebBackend.DomainPublications.Services
         //private readonly IUserRepository _userRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IUserRepository _userRepository;
+        private readonly IPetRepository _petRepository;
 
-        public PublicationService(IPublicationRepository publicationRepository,IUnitOfWork unitOfWork, IUserRepository userRepository)
+        public PublicationService(IPublicationRepository publicationRepository,IUnitOfWork unitOfWork, IUserRepository userRepository, IPetRepository petRepository)
         {
             _publicationRepository = publicationRepository;
             _unitOfWork = unitOfWork;
             _userRepository = userRepository;
+            _petRepository = petRepository;
         }
         public async Task<IEnumerable<Publication>> ListPublicationAsync()
         {
@@ -33,8 +36,11 @@ namespace GrupoWebBackend.DomainPublications.Services
         }
 
         public async Task<SavePublicationResponse> SaveAsync(Publication publication)
-        { 
-           
+        {
+            var existingPet = await _petRepository.FindAsync(publication.PetId);
+            if (existingPet == null)
+                return new SavePublicationResponse(false, "This pet doesn't exist.", publication);
+
             var existingUserPublication = await _publicationRepository.FindByUserId(publication.UserId);
             if (existingUserPublication == null)
                 return new SavePublicationResponse(false,"This pet is already published.", publication);
@@ -53,6 +59,9 @@ namespace GrupoWebBackend.DomainPublications.Services
             
             if(existingUser.Subscription == null)
                 return new SavePublicationResponse(false, "This user not have a subscription.", publication);
+
+            publication.Pet = existingPet;
+            publication.IsEnabled = true;
             
             try
             {
