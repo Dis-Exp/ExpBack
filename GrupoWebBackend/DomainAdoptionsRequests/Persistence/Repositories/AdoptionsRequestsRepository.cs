@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GrupoWebBackend.DomainAdoptionsRequests.Persistence.Repositories
 {
-    public class AdoptionsRequestsRepository: BaseRepository,IAdoptionsRequestsRepository
+    public class AdoptionsRequestsRepository: BaseRepository, IAdoptionsRequestsRepository
     {
         public AdoptionsRequestsRepository(AppDbContext context) : base(context)
         {
@@ -46,12 +46,12 @@ namespace GrupoWebBackend.DomainAdoptionsRequests.Persistence.Repositories
             _context.AdoptionsRequests.Remove(adoptionsRequests);
         }
 
-        public async Task<IEnumerable<AdoptionsRequests>> getAllUserAtNotifications(int id)
+        public  IEnumerable<AdoptionsRequests> getAllUserAtNotifications(int id)
         {
-            return  _context.AdoptionsRequests.Where(e=>e.UserIdAt==id);
+            return _context.AdoptionsRequests.Where(e=>e.UserIdAt==id);
         }
 
-        public async Task<IEnumerable<AdoptionsRequests>> getAllUserFromNotifications(int id)
+        public  IEnumerable<AdoptionsRequests> getAllUserFromNotifications(int id)
         {
             return  _context.AdoptionsRequests.Where(e=>e.UserIdFrom==id);        }
 

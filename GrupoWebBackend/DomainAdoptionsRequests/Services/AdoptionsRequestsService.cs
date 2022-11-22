@@ -19,7 +19,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GrupoWebBackend.DomainAdoptionsRequests.Services
 {
-    public class AdoptionsRequestsService:IAdoptionsRequestsService
+    public class AdoptionsRequestsService : IAdoptionsRequestsService
     {
         private readonly IAdoptionsRequestsRepository _requestsAdoptionsRepository;
 
@@ -109,14 +109,14 @@ namespace GrupoWebBackend.DomainAdoptionsRequests.Services
           }
       }
 
-      public async Task<IEnumerable<AdoptionsRequests>> getAllUserAt(int id)
+      public IEnumerable<AdoptionsRequests> getAllUserAt(int id)
       {
-              var result = await _requestsAdoptionsRepository.getAllUserAtNotifications(id);
+              var result = _requestsAdoptionsRepository.getAllUserAtNotifications(id);
               return result;
       }
-      public async Task<IEnumerable<AdoptionsRequests>> getAllUserFrom(int id)
+      public IEnumerable<AdoptionsRequests> getAllUserFrom(int id)
       {
-          var result = await _requestsAdoptionsRepository.getAllUserFromNotifications(id);
+          var result = _requestsAdoptionsRepository.getAllUserFromNotifications(id);
           return result;      
       }
 
