@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using GrupoWebBackend.DomainSubscriptions.Domain.Models;
+using GrupoWebBackend.DomainSubscriptions.Domain.Repositories;
 using GrupoWebBackend.Security.Authorization.Handlers.Interfaces;
 using GrupoWebBackend.Security.Domain.Entities;
 using GrupoWebBackend.Security.Domain.Repositories;
@@ -20,13 +22,15 @@ namespace GrupoWebBackend.Security.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly IJwtHandler _jwtHandler;
         private readonly IMapper _mapper;
-        
-        public UserService(IUserRepository userRepository, IUnitOfWork unitOfWork, IJwtHandler jwtHandler, IMapper mapper)
+
+        private readonly ISubscriptionRepository _subscriptionRepository;
+        public UserService(IUserRepository userRepository, IUnitOfWork unitOfWork, IJwtHandler jwtHandler, IMapper mapper, ISubscriptionRepository subscriptionRepository)
         {
             _userRepository = userRepository;
             _unitOfWork = unitOfWork;
             _jwtHandler = jwtHandler;
             _mapper = mapper;
+            _subscriptionRepository = subscriptionRepository;
         }
 
         public async Task<AuthenticateResponse> Authenticate(AuthenticateRequest request)
@@ -72,11 +76,21 @@ namespace GrupoWebBackend.Security.Services
             
             // Hash Password
             user.PasswordHash = BCryptNet.HashPassword(request.Pass);
+
+            // Basic subscription
+            var newSubscription = new Subscription();
+
+            newSubscription.StartDate = DateTime.Now;
+            newSubscription.EndDate = DateTime.Now.AddYears(10);
+            newSubscription.User = user;
+            newSubscription.Expired = false;
+            newSubscription.NumPosts = 5;
             
             // Save User
             try
             {
                 await _userRepository.AddAsync(user);
+                await _subscriptionRepository.AddAsync(newSubscription);
                 await _unitOfWork.CompleteAsync();
             }   
             catch(Exception e)
