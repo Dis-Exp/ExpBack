@@ -20,7 +20,6 @@ namespace GrupoWebBackend.Shared.Persistence.Context
         {
             _configuration = configuration;
         }
-        
         public DbSet<Pet> Pets { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Advertisement> Advertisements { get; set; }
@@ -149,7 +148,8 @@ namespace GrupoWebBackend.Shared.Persistence.Context
             // Pet Relations
             builder.Entity<User>().HasMany(p => p.Pets)
                 .WithOne(p => p.User)
-                .HasForeignKey(p => p.UserId);
+                .HasForeignKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.ClientCascade);
 
             builder.Entity<Pet>().HasOne(p => p.User)
                 .WithMany(p => p.Pets)
@@ -158,12 +158,14 @@ namespace GrupoWebBackend.Shared.Persistence.Context
             //Advertisement Relations
             builder.Entity<User>().HasMany(p => p.Advertisements)
                 .WithOne(p => p.User)
-                .HasForeignKey(p => p.UserId);
+                .HasForeignKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.ClientCascade);
 
             //User Relationships
             builder.Entity<User>().HasMany(p => p.Publications)
                 .WithOne(p => p.User)
-                .HasForeignKey(p => p.UserId);
+                .HasForeignKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.ClientCascade);
 
             //Publication Relations
             builder.Entity<Publication>().HasOne(p => p.Pet);
@@ -172,26 +174,28 @@ namespace GrupoWebBackend.Shared.Persistence.Context
             builder.Entity<Publication>().HasMany(p => p.AdoptionsRequestsList)
                 .WithOne(p => p.Publication)
                 .HasForeignKey(p => p.PublicationId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.ClientCascade);
             
             //AdoptionsRequests Relations 
             builder.Entity<User>().HasMany(p => p.AdoptionsRequestsList)
                 .WithOne(p => p.User)
-                .HasForeignKey(p => p.UserIdFrom);
+                .HasForeignKey(p => p.UserIdFrom)
+                .OnDelete(DeleteBehavior.ClientCascade);
 
             //Subscriptions Relations
             builder.Entity<User>().HasOne(u => u.Subscription)
                .WithOne(s => s.User)
-               .HasForeignKey<Subscription>(s => s.UserId);
-          
-          /*  builder.Entity<User>().HasMany(p => p.AdoptionsRequestsList)
-                .WithOne(p => p.User)
-                .HasForeignKey(p => p.UserIdAt);
+               .HasForeignKey<Subscription>(s => s.UserId)
+               .OnDelete(DeleteBehavior.ClientCascade);
 
-            builder.Entity<Publication>().HasMany(p => p.AdoptionsRequestsList)
-                .WithOne(p => p.Publication)
-                .HasForeignKey(p => p.PublicationId);
-*/
+            /*  builder.Entity<User>().HasMany(p => p.AdoptionsRequestsList)
+                  .WithOne(p => p.User)
+                  .HasForeignKey(p => p.UserIdAt);
+
+              builder.Entity<Publication>().HasMany(p => p.AdoptionsRequestsList)
+                  .WithOne(p => p.Publication)
+                  .HasForeignKey(p => p.PublicationId);
+  */
             builder.Entity<District>().HasData(
                 new District
                 {
